@@ -274,7 +274,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-dark">
+      <section className="section section-light">
         <div className="shell">
           <div className="section-heading reveal">
             <span className="section-kicker kicker-with-dot">Why Seversoft</span>

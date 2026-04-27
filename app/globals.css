@@ -1253,6 +1253,12 @@ p {
   background: rgba(255, 255, 255, 0.03);
 }
 
+.section-light .benefit-card {
+  background: #fff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
 .benefit-index {
   display: inline-flex;
   margin-bottom: 16px;
@@ -1260,6 +1266,10 @@ p {
   font-size: 0.82rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.section-light .benefit-index {
+  color: #2563eb;
 }
 
 .how-it-works {
@@ -2609,4 +2619,19 @@ p {
 .about-mission-copy {
   max-width: 100% !important;
   flex: 1;
+}
+
+/* ── Ecosystem Page ── */
+.dev-first-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .dev-first-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }

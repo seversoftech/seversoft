@@ -144,7 +144,7 @@ export default function EcosystemPage() {
 
       <section className="section section-dark">
         <div className="shell">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
+          <div className="dev-first-grid">
             <div>
               <span className="section-kicker kicker-with-dot">Developer First</span>
               <h2 style={{ marginTop: "20px" }}>API-first. Built for builders.</h2>
