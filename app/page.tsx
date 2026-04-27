@@ -52,6 +52,68 @@ const reviews = [
   },
 ];
 
+const partners = [
+  { name: "Paystack", color: "#00a3d9" },
+  { name: "Flutterwave", color: "#fb9129" },
+  { name: "Monnify", color: "#003399" },
+  { name: "AWS", color: "#ff9900" },
+  { name: "Google Cloud", color: "#4285f4" },
+  { name: "OpenAI", color: "#10a37f" },
+  { name: "Twilio", color: "#f22f46" },
+  { name: "Stripe", color: "#635bff" },
+  { name: "Supabase", color: "#3ecf8e" },
+  { name: "OneSignal", color: "#eb4b26" },
+  { name: "Firebase", color: "#ffca28" },
+  { name: "MongoDB", color: "#47a248" },
+  { name: "Redis", color: "#d82c20" },
+  { name: "Cloudinary", color: "#3448c5" },
+];
+
+const codeSnippets = [
+  {
+    label: "Payments",
+    lang: "javascript",
+    code: `// Initialize a high-throughput transfer
+const transfer = await seversoft.payments.create({
+  amount: 250000,
+  currency: "NGN",
+  source: "wallet_abc123",
+  destination: "bank_xyz789",
+  reference: "TXN_99012"
+});
+
+console.log(transfer.status); // 'pending'
+`,
+  },
+  {
+    label: "Wallets",
+    lang: "javascript",
+    code: `// Provision a dedicated business wallet
+const wallet = await seversoft.wallets.provision({
+  ownerId: "biz_8821",
+  currency: "NGN",
+  features: ["payouts", "inbound"],
+  tier: "premium"
+});
+
+return wallet.accountNumber;
+`,
+  },
+  {
+    label: "Workflows",
+    lang: "javascript",
+    code: `// Automate bill payments
+seversoft.workflows.on('invoice.created', async (event) => {
+  await seversoft.bills.pay({
+    provider: event.provider,
+    amount: event.total,
+    autoApprove: true
+  });
+});
+`,
+  },
+];
+
 
 
 function HeroVisual() {
@@ -116,6 +178,23 @@ export default function Home() {
               </a>
             </div>
             <HeroVisual />
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-dark" style={{ paddingTop: 0, paddingBottom: "72px" }}>
+        <div className="shell">
+          <div style={{ textAlign: "center", marginBottom: "42px" }}>
+            <span style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", opacity: 0.7 }}>
+              Powering integrations with leading platforms
+            </span>
+          </div>
+          <div className="logo-cloud">
+            {partners.map((p) => (
+              <div key={p.name} className="logo-item" style={{ "--hover-color": p.color } as any}>
+                {p.name}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -205,6 +284,51 @@ export default function Home() {
       </section>
 
       <ServicesFlashcards />
+
+      <section className="section section-dark">
+        <div className="shell">
+          <div className="dev-preview-grid">
+            <div className="reveal">
+              <span className="section-kicker kicker-with-dot">Developer First</span>
+              <h2>Built for builders. Designed for scale.</h2>
+              <p style={{ color: "var(--text-soft)", fontSize: "1.1rem", lineHeight: "1.7", marginBottom: "32px" }}>
+                Our infrastructure is built API-first. Integrate payment flows, wallet systems, and automation triggers 
+                into your existing product with just a few lines of code.
+              </p>
+              <div style={{ display: "grid", gap: "20px" }}>
+                {[
+                  { title: "Clean REST APIs", desc: "Predictable, versioned JSON APIs." },
+                  { title: "Webhook Events", desc: "Real-time updates for every transaction." },
+                  { title: "Sandbox Mode", desc: "Test your logic before going live." }
+                ].map(item => (
+                  <div key={item.title} style={{ display: "flex", gap: "12px" }}>
+                    <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "var(--teal)", flexShrink: 0, marginTop: "4px", opacity: 0.3 }} />
+                    <div>
+                      <strong style={{ display: "block", color: "var(--text)", marginBottom: "4px" }}>{item.title}</strong>
+                      <span style={{ fontSize: "0.9rem", color: "var(--text-soft)" }}>{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <a href="/documentation" className="button button-secondary" style={{ marginTop: "40px" }}>Explore Documentation</a>
+            </div>
+            
+            <div className="terminal-window reveal reveal-delay">
+              <div className="terminal-header">
+                <div className="terminal-dots">
+                  <span /> <span /> <span />
+                </div>
+                <div className="terminal-title">seversoft-api-preview.js</div>
+              </div>
+              <div className="terminal-body">
+                <pre>
+                  <code>{codeSnippets[0].code}</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section id="store" className="section section-light">
         <div className="shell">

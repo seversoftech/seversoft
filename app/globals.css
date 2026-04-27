@@ -2635,3 +2635,119 @@ p {
     gap: 40px;
   }
 }
+
+/* ── Logo Cloud ── */
+.logo-cloud {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 24px 64px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  opacity: 0.55;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  position: relative;
+  white-space: nowrap;
+}
+
+.logo-item:hover {
+  opacity: 1;
+  color: var(--hover-color, var(--text));
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px var(--hover-color, transparent));
+}
+
+@media (max-width: 768px) {
+  .logo-cloud {
+    gap: 24px 32px;
+  }
+  .logo-item {
+    font-size: 1rem;
+  }
+}
+
+/* ── Developer Preview ── */
+.dev-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .dev-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.terminal-window {
+  background: #080a0c;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+  background: #121518;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #282c34;
+}
+
+.terminal-dots span:nth-child(1) { background: #ff5f56; }
+.terminal-dots span:nth-child(2) { background: #ffbd2e; }
+.terminal-dots span:nth-child(3) { background: #27c93f; }
+
+.terminal-title {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #a5d0ff;
+  overflow-x: auto;
+}
+
+.terminal-body code {
+  color: #8fc6ff;
+}
+
+.terminal-body pre {
+  margin: 0;
+}
