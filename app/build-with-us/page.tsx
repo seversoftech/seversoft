@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const roles = [
   "Startup Founder",
@@ -299,12 +300,7 @@ Message: ${data.message}`;
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="shell footer-bottom">
-          <span>© 2026 Seversoft Technologies. Built for confident digital growth.</span>
-          <span className="status-pill"><i />Systems operational</span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

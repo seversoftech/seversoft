@@ -761,25 +761,28 @@ p {
 
 .hero-metrics {
   position: relative;
-  margin-top: 40px;
+  margin-top: 32px;
   display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.hero-metrics::-webkit-scrollbar {
-  display: none;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .hero-metrics .uptime-card {
   position: relative;
   left: 0;
   bottom: 0;
-  min-width: 160px;
+  min-width: 135px;
+  padding: 12px 15px;
   flex: 0 0 auto;
+}
+
+.hero-metrics .uptime-card strong {
+  font-size: 1.35rem;
+}
+
+.hero-metrics .uptime-card span {
+  font-size: 0.65rem;
+  margin-top: 4px;
 }
 
 @media (max-width: 860px) {
@@ -789,19 +792,24 @@ p {
     flex-wrap: nowrap !important;
     gap: 12px;
     overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
     width: 100vw;
-    margin-left: -20px; /* Bleed out to edges */
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: -20px;
+    padding: 0 20px 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .hero-metrics::-webkit-scrollbar {
+    display: none;
   }
   
   .hero-metrics .uptime-card {
-    min-width: 140px;
+    min-width: 130px;
     padding: 12px 14px;
     position: relative !important;
     left: auto !important;
     bottom: auto !important;
+    flex: 0 0 auto;
   }
   
   .hero-metrics .uptime-card strong {
@@ -1404,9 +1412,19 @@ p {
   }
 }
 
-@keyframes uptime-float {
+@keyframes float-v {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-20px); }
+  100% { transform: translateY(-15px); }
+}
+
+@keyframes float-r {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes float-s {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-10px) scale(1.03); }
 }
 
 @keyframes innovation-pulse {

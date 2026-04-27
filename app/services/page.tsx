@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const detailedServices = [
   {
@@ -221,28 +222,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="shell footer-grid">
-          <div className="footer-brand">
-            <a href="#top" className="brand">
-              <img 
-                src="/media/seversoft_logo.png" 
-                alt="Seversoft Logo" 
-                style={{ width: "28px", height: "28px", borderRadius: "50%", objectFit: "cover" }}
-              />
-              <span className="brand-name">Seversoft</span>
-            </a>
-            <p>Seversoft builds software solutions for every platform, AI-powered systems, and fintech products for modern businesses.</p>
-          </div>
-        </div>
-        <div className="shell footer-bottom">
-          <span>© 2026 Seversoft Technologies. Built for confident digital growth.</span>
-          <span className="status-pill">
-            <i />
-            Systems operational
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

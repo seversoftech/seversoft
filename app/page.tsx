@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import ServicesFlashcards from "@/components/ServicesFlashcards";
 
 const coreCapabilities = [
@@ -51,24 +52,20 @@ const reviews = [
   },
 ];
 
-const footerLinks = {
-  company: ["About", "Services", "Store", "Testimonials"],
-  resources: ["Documentation", "API Access", "Support", "Contact"],
-  legal: ["Privacy Policy", "Terms of Service", "Compliance", "Cookies"],
-};
+
 
 function HeroVisual() {
   return (
     <div className="hero-metrics">
-      <div className="uptime-card">
+      <div className="uptime-card" style={{ animation: "float-v 3s ease-in-out infinite alternate", animationDelay: "0s" }}>
         <strong>Enterprise</strong>
         <span>Engineering Scale</span>
       </div>
-      <div className="uptime-card">
+      <div className="uptime-card" style={{ animation: "float-r 3.5s ease-in-out infinite alternate", animationDelay: "-1.2s" }}>
         <strong>AI-Driven</strong>
         <span>Modern Intelligence</span>
       </div>
-      <div className="uptime-card">
+      <div className="uptime-card" style={{ animation: "float-s 4s ease-in-out infinite alternate", animationDelay: "-2.5s" }}>
         <strong>99.9%</strong>
         <span>System Reliability</span>
       </div>
@@ -327,52 +324,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="shell footer-grid">
-          <div className="footer-brand">
-            <a href="#top" className="brand">
-              <img 
-                src="/media/seversoft_logo.png" 
-                alt="Seversoft Logo" 
-                style={{ width: "28px", height: "28px", borderRadius: "50%", objectFit: "cover" }}
-              />
-              <span className="brand-name">Seversoft</span>
-            </a>
-            <p>
-              Seversoft builds software solutions for every platform, AI-powered systems, and fintech products for
-              modern businesses.
-            </p>
-            <div className="footer-socials">
-              <a href="https://x.com" target="_blank" rel="noreferrer">
-                X
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-              <a href="mailto:info@seversoftech.com">Email</a>
-            </div>
-          </div>
-
-          {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group} className="footer-column">
-              <h3>{group}</h3>
-              {links.map((link) => (
-                <a key={link} href="#top">
-                  {link}
-                </a>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <div className="shell footer-bottom">
-          <span>© 2026 Seversoft Technologies. Built for confident digital growth.</span>
-          <span className="status-pill">
-            <i />
-            Systems operational
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
