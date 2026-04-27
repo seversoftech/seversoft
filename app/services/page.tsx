@@ -99,7 +99,7 @@ export default function ServicesPage() {
     <main id="top">
       <Navbar />
 
-      <section className="section section-dark services-hero">
+      <section className="section section-dark services-hero ecosystem-hero">
         <div className="shell">
           <div className="section-heading centered reveal">
             <span className="section-kicker kicker-with-dot">Our Expertise</span>

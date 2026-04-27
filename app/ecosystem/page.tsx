@@ -56,7 +56,7 @@ export default function EcosystemPage() {
     <main id="top">
       <Navbar />
 
-      <section className="section section-dark" style={{ paddingTop: "80px", paddingBottom: "100px" }}>
+      <section className="section section-dark ecosystem-hero" style={{ paddingTop: "80px", paddingBottom: "100px" }}>
         <div className="shell" style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto" }}>
           <span className="section-kicker kicker-with-dot">The Seversoft Ecosystem</span>
           <h1 style={{ marginTop: "20px", marginBottom: "20px" }}>
