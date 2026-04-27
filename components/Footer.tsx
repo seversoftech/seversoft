@@ -6,18 +6,18 @@ const footerLinks = {
   company: [
     { label: "About", href: "/#about" },
     { label: "Services", href: "/services" },
-    { label: "Ecosystem", href: "/#ecosystem" },
+    { label: "Ecosystem", href: "/ecosystem" },
     { label: "Build With Us", href: "/build-with-us" },
   ],
   resources: [
-    { label: "Documentation", href: "#" },
-    { label: "API Access", href: "#" },
-    { label: "Support", href: "/build-with-us" },
+    { label: "Documentation", href: "/documentation" },
+    { label: "API Access", href: "/documentation" },
+    { label: "Support", href: "/support" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms" },
-    { label: "Compliance", href: "#" },
+    { label: "Compliance", href: "/compliance" },
   ],
 };
 
