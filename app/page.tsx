@@ -164,8 +164,8 @@ export default function Home() {
 
             <figure className="impact-photo">
               <img
-                src="https://images.pexels.com/photos/6150432/pexels-photo-6150432.jpeg?auto=compress&cs=tinysrgb&w=900"
-                alt="A joyful multiracial group of people laughing together indoors"
+                src="/media/it_collaborators.png"
+                alt="A diverse group of happy IT collaborators working together in a modern office"
               />
             </figure>
 
