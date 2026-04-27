@@ -142,11 +142,11 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      <section className="section section-dark">
+      <section className="section section-dark" style={{ paddingTop: '140px' }}>
         <div className="shell">
           <div className="dev-first-grid">
             <div>
-              <span className="section-kicker kicker-with-dot">Developer First</span>
+              <span className="section-kicker kicker-with-dot" style={{ marginTop: '20px' }}>Developer First</span>
               <h2 style={{ marginTop: "20px" }}>API-first. Built for builders.</h2>
               <p style={{ color: "var(--text-soft)", lineHeight: "1.8", marginBottom: "28px" }}>
                 Every product in the Seversoft ecosystem is designed with developers in mind. Clean REST APIs, predictable responses, webhooks, and sandbox environments — so your team can integrate fast and ship with confidence.
