@@ -151,6 +151,32 @@ export default function Home() {
                 We create practical digital solutions that solve meaningful problems, open new opportunities, and help
                 ambitious teams grow with confidence.
               </p>
+
+              <div className="visual-progress-chart">
+                <svg viewBox="0 0 400 150" className="progress-svg">
+                  <defs>
+                    <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--teal)" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="var(--teal)" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path 
+                    className="chart-path-area" 
+                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10 L400,150 L0,150 Z" 
+                    fill="url(#chartGradient)"
+                  />
+                  <path 
+                    className="chart-path-line" 
+                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10" 
+                    fill="none" 
+                    stroke="var(--teal)" 
+                    strokeWidth="3"
+                  />
+                  <circle cx="400" cy="10" r="4" fill="var(--teal)" className="chart-point">
+                    <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+              </div>
             </div>
           </article>
 
