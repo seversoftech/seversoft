@@ -15,8 +15,8 @@ const footerLinks = {
     { label: "Support", href: "/build-with-us" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms" },
     { label: "Compliance", href: "#" },
   ],
 };

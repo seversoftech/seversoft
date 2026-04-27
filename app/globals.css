@@ -2278,3 +2278,131 @@ p {
 
 
 
+
+/* Content Pages (Privacy, Terms, etc) */
+.content-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 0 140px;
+}
+
+.content-page .section-kicker {
+  margin-bottom: 24px;
+}
+
+.content-page h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  margin-bottom: 16px;
+  color: var(--text-dark);
+  letter-spacing: -0.05em;
+  font-weight: 800;
+}
+
+.content-date {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.content-date::before {
+  content: "";
+  width: 16px;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.prose {
+  color: #334155;
+  line-height: 1.85;
+  font-size: 1.1rem;
+}
+
+.prose h2 {
+  font-size: 1.8rem;
+  margin: 64px 0 24px;
+  color: var(--text-dark);
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.prose h3 {
+  font-size: 1.3rem;
+  margin: 40px 0 16px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.prose p {
+  margin-bottom: 28px;
+  opacity: 0.9;
+}
+
+.prose strong {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.prose ul, .prose ol {
+  margin: 0 0 32px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prose li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+}
+
+.prose li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue-strong);
+  box-shadow: 0 0 8px rgba(94, 174, 254, 0.4);
+}
+
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #1d4ed8;
+}
+
+.prose-card {
+  padding: 32px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  margin: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .content-page {
+    padding-top: 48px;
+  }
+  
+  .prose {
+    font-size: 1rem;
+  }
+  
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: 48px;
+  }
+}
