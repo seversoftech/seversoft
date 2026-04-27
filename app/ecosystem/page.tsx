@@ -124,7 +124,7 @@ export default function EcosystemPage() {
         </div>
       </section>
 
-      <section className="section section-light" style={{ paddingTop: "0" }}>
+      <section className="section section-light" style={{ paddingTop: "80px" }}>
         <div className="shell">
           <div className="section-heading reveal">
             <span className="section-kicker kicker-with-dot">Integration Partners</span>
