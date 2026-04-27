@@ -748,7 +748,7 @@ p {
   background: rgba(12, 16, 20, 0.84);
   backdrop-filter: blur(20px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-  animation: uptime-float 2.5s ease-in-out infinite alternate !important;
+  animation: uptime-float 3s ease-in-out infinite alternate;
 }
 
 .uptime-card strong {
@@ -774,6 +774,20 @@ p {
   min-width: 135px;
   padding: 12px 15px;
   flex: 0 0 auto;
+}
+
+.hero-metrics .uptime-card:nth-child(1) {
+  animation: float-v 3s ease-in-out infinite alternate !important;
+}
+
+.hero-metrics .uptime-card:nth-child(2) {
+  animation: float-r 3.5s ease-in-out infinite alternate-reverse !important;
+  animation-delay: -1.2s !important;
+}
+
+.hero-metrics .uptime-card:nth-child(3) {
+  animation: float-s 4s ease-in-out infinite alternate !important;
+  animation-delay: -2.5s !important;
 }
 
 .hero-metrics .uptime-card strong {
@@ -1410,6 +1424,11 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes uptime-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-18px); }
 }
 
 @keyframes float-v {

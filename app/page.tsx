@@ -57,15 +57,15 @@ const reviews = [
 function HeroVisual() {
   return (
     <div className="hero-metrics">
-      <div className="uptime-card" style={{ animation: "float-v 3s ease-in-out infinite alternate", animationDelay: "0s" }}>
+      <div className="uptime-card">
         <strong>Enterprise</strong>
         <span>Engineering Scale</span>
       </div>
-      <div className="uptime-card" style={{ animation: "float-r 3.5s ease-in-out infinite alternate", animationDelay: "-1.2s" }}>
+      <div className="uptime-card">
         <strong>AI-Driven</strong>
         <span>Modern Intelligence</span>
       </div>
-      <div className="uptime-card" style={{ animation: "float-s 4s ease-in-out infinite alternate", animationDelay: "-2.5s" }}>
+      <div className="uptime-card">
         <strong>99.9%</strong>
         <span>System Reliability</span>
       </div>
