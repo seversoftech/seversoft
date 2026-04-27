@@ -8,8 +8,11 @@ export const metadata: Metadata = {
   keywords: ["Seversoft Technologies", "fintech", "software solutions", "Nigeria", "landing page"],
   openGraph: {
     title: "Seversoft Technologies",
-    description: "Pay Smart. Pay Fast. Pay Soft.",
+    description: "Build Smart. Scale Fast. Grow Confidently.",
     type: "website",
+  },
+  icons: {
+    icon: "/media/seversoft_logo.png",
   },
 };
 

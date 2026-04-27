@@ -27,9 +27,12 @@ export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" })
       <div className="shell">
         <nav className="nav">
           <a href="/" className="brand">
-            <span className="brand-mark" aria-hidden="true">
-              <span className="brand-mark-dot" />
-            </span>
+            <img 
+              src="/media/seversoft_logo.png" 
+              alt="Seversoft Logo" 
+              className="brand-logo"
+              style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
+            />
             <span className="brand-name">Seversoft</span>
           </a>
 

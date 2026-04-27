@@ -1,4 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+@font-face {
+    font-family: 'Baron Neue Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Baron Neue Bold'), url('https://fonts.cdnfonts.com/s/12591/Baron%20Neue%20Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Baron Neue';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Baron Neue'), url('https://fonts.cdnfonts.com/s/12591/Baron%20Neue.woff') format('woff');
+}
+
 @import "tailwindcss";
 
 :root {
@@ -173,8 +188,7 @@ main {
 
 h1,
 h2,
-h3,
-.brand-name {
+h3 {
   font-family: "Space Grotesk", sans-serif;
   letter-spacing: -0.04em;
 }
@@ -304,28 +318,16 @@ p {
   gap: 10px;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: linear-gradient(180deg, #ecf5ff, #9bcaff);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
-}
 
-.brand-mark-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #0b1117, #1d3348);
-}
 
-.brand-name {
-  font-size: 1.04rem;
+.brand .brand-name {
+  font-family: 'Baron Neue Bold', 'Baron Neue', sans-serif;
+  font-size: 1.22rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #fff;
+  display: inline-block;
 }
 
 .nav-links {
@@ -433,6 +435,11 @@ p {
 
 .hero {
   padding-top: 48px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(79, 210, 195, 0.15), transparent 22%),
+    radial-gradient(circle at 12% 10%, rgba(143, 198, 255, 0.15), transparent 28%),
+    linear-gradient(180deg, rgba(12, 15, 17, 0.75) 0%, #0c0f11 100%),
+    url('/media/hero_tech_team.png') center/cover no-repeat;
 }
 
 .about-section {
@@ -598,19 +605,24 @@ p {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  align-items: center;
-  gap: 54px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: flex-start;
+  gap: 64px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .hero-copy {
-  max-width: 650px;
+  /* removed max-width to fill column */
 }
 
 .hero-subtitle {
-  max-width: 580px;
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 
 .hero-points {
@@ -745,6 +757,60 @@ p {
   font-size: 1.7rem;
   line-height: 1;
   color: #dff2ff;
+}
+
+.hero-metrics {
+  position: relative;
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hero-metrics::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-metrics .uptime-card {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  min-width: 160px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 860px) {
+  .hero-metrics {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 12px;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100vw;
+    margin-left: -20px; /* Bleed out to edges */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .hero-metrics .uptime-card {
+    min-width: 140px;
+    padding: 12px 14px;
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+  
+  .hero-metrics .uptime-card strong {
+    font-size: 1.3rem;
+  }
+  
+  .hero-metrics .uptime-card span {
+    font-size: 0.75rem;
+  }
 }
 
 .uptime-card span {
@@ -1511,9 +1577,12 @@ p {
     align-items: flex-start;
   }
 
-  .uptime-card {
-    left: 12px;
-    bottom: 12px;
+  .hero-metrics .uptime-card {
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+    min-width: 140px;
+    flex: 0 0 auto;
   }
 
   .feature-card,

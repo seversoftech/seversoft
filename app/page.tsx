@@ -59,17 +59,18 @@ const footerLinks = {
 
 function HeroVisual() {
   return (
-    <div className="hero-visual frame-card">
-      <div className="hero-visual-glow hero-visual-glow-a" />
-      <div className="hero-visual-glow hero-visual-glow-b" />
-      <img 
-        src="/media/hero_tech_team.png" 
-        alt="Seversoft technology team collaborating with modern gadgets"
-        className="hero-image"
-      />
+    <div className="hero-metrics">
+      <div className="uptime-card">
+        <strong>Enterprise</strong>
+        <span>Engineering Scale</span>
+      </div>
+      <div className="uptime-card">
+        <strong>AI-Driven</strong>
+        <span>Modern Intelligence</span>
+      </div>
       <div className="uptime-card">
         <strong>99.9%</strong>
-        <span>Transaction uptime</span>
+        <span>System Reliability</span>
       </div>
     </div>
   );
@@ -91,8 +92,16 @@ export default function Home() {
               <br />
               <span className="text-gradient">AI Solutions for Modern Growth.</span>
             </h1>
+            <div className="hero-trustline">
+              <span>Software engineering</span>
+              <span>AI systems</span>
+              <span>Fintech products</span>
+            </div>
+          </div>
+
+          <div className="hero-content reveal reveal-delay">
             <p className="hero-subtitle">
-              Seversoft designs and builds modern software, fintech products, and AI-powered systems for businesses
+              Designing and building modern software, fintech products, and AI-powered systems for businesses
               that want to grow with clarity, speed, and confidence.
             </p>
             <ul className="hero-points">
@@ -108,14 +117,6 @@ export default function Home() {
                 Explore Services
               </a>
             </div>
-            <div className="hero-trustline">
-              <span>Software engineering</span>
-              <span>AI systems</span>
-              <span>Fintech products</span>
-            </div>
-          </div>
-
-          <div className="reveal reveal-delay">
             <HeroVisual />
           </div>
         </div>
@@ -129,7 +130,7 @@ export default function Home() {
 
           <div className="about-copy reveal reveal-delay">
             <h2>
-              We&apos;re crafting digital experiences that propel ambitious businesses forward with clarity,
+              We engineer high-performance digital systems that empower ambitious businesses to scale with clarity,
               confidence, and modern execution.
             </h2>
             <p className="about-lead">
@@ -185,38 +186,38 @@ export default function Home() {
         <div className="shell">
           <div className="marketplace">
             <div className="marketplace-copy reveal">
-              <span className="section-kicker kicker-with-dot">Featured Product</span>
-              <h2>Meet Softpay, one of the products powering the Seversoft ecosystem</h2>
+              <span className="section-kicker kicker-with-dot">Our Ecosystem</span>
+              <h2>Powering the next generation of digital infrastructure</h2>
               <p>
-                Softpay brings Seversoft&apos;s fintech thinking to life with a faster way to handle digital payments,
-                utility services, and transaction-led experiences for users and resellers.
+                Seversoft develops high-performance software, AI systems, and fintech infrastructure designed to 
+                scale with modern business demands across every industry.
               </p>
               <ul className="check-list">
-                <li>Pay Smart. Pay Fast. Pay Soft.</li>
-                <li>VTU apps and utility payments designed for smooth customer flows</li>
-                <li>API subscriptions and developer tools for payment-led products</li>
+                <li>Build Smart. Scale Fast. Grow Confidently.</li>
+                <li>High-throughput transaction engines and secure payment flows</li>
+                <li>AI-driven workflow automation and intelligent product systems</li>
               </ul>
-              <a className="button button-primary" href="https://softpay.seversoftech.com" target="_blank" rel="noreferrer">
-                Visit Softpay
+              <a className="button button-primary" href="/services">
+                Explore Our Solutions
               </a>
             </div>
 
             <div className="marketplace-panel reveal reveal-delay">
               <div className="marketplace-orb" />
               <div className="store-card store-card-main">
-                <span className="store-tag">Softpay</span>
-                <strong>Pay Smart. Pay Fast. Pay Soft.</strong>
-                <p>Fast utility payments, wallet flows, and digital transaction tools wrapped in a premium experience.</p>
+                <span className="store-tag">Infrastructure</span>
+                <strong>Scalable. Secure. Reliable.</strong>
+                <p>Enterprise-grade software and fintech infrastructure built for speed and long-term stability.</p>
               </div>
               <div className="store-card store-card-side">
-                <span className="store-tag">Product</span>
-                <strong>VTU & Bill Payments</strong>
-                <p>Built for airtime, data, electricity, cable, and other everyday digital payment needs.</p>
+                <span className="store-tag">AI Systems</span>
+                <strong>Intelligent Workflows</strong>
+                <p>Custom AI solutions designed to automate complex processes and drive data-led growth.</p>
               </div>
               <div className="store-card store-card-bottom">
-                <span className="store-tag">Developers</span>
-                <strong>APIs & Tools</strong>
-                <p>Connect Softpay capabilities into your product with developer-friendly access and support.</p>
+                <span className="store-tag">Development</span>
+                <strong>API-First Approach</strong>
+                <p>Robust developer tools and APIs that integrate seamlessly into your existing product stack.</p>
               </div>
             </div>
           </div>
@@ -228,16 +229,15 @@ export default function Home() {
           <div className="how-it-works frame-card reveal">
             <div className="section-heading compact">
               <span className="section-kicker kicker-with-dot">How It Works</span>
-              <h2>Start transacting in five simple steps</h2>
+              <h2>Start transacting in four simple steps</h2>
             </div>
 
             <div className="steps-grid">
               {[
-                ["Secure Registration", "Create your enterprise or personal account to join the Seversoft ecosystem."],
-                ["Verify Identity", "Complete a quick KYC verification to ensure bank-grade security and full access to our financial tools."],
-                ["Generate Wallet", "Instantly spin up a personal or business wallet with multi-currency support and unique identifiers."],
-                ["Fund & Activate", "Load your wallet securely via multiple payment channels to fuel your transactions and API integrations."],
-                ["Go Live", "Pay bills, automate operations, or connect your own products to our high-throughput transaction engine."],
+                ["Account Setup", "Register your enterprise or personal account and verify your identity for secure, full-scale access."],
+                ["Instant Wallet", "Generate a multi-currency business or personal wallet with unique identifiers in seconds."],
+                ["Secure Funding", "Load your wallet through multiple payment channels to power your transactions and API tools."],
+                ["Go Live", "Pay bills, automate operations, and connect your products to our high-throughput transaction engine."],
               ].map(([title, text], index) => (
                 <article key={title} className="step-card">
                   <span className="step-number">{index + 1}</span>
@@ -301,8 +301,8 @@ export default function Home() {
             <span className="section-kicker kicker-with-dot">Build With Us</span>
             <h2>Start Building or Transacting with Ease Today</h2>
             <p>
-              Build with Seversoft for modern software solutions, AI-powered systems, and products like Softpay that
-              make digital transactions feel easier.
+              Build with Seversoft for modern software solutions, AI-powered systems, and scalable infrastructure that
+              propels your business forward.
             </p>
             <a className="button button-primary" href="/build-with-us">
               Let's Talk
@@ -331,9 +331,11 @@ export default function Home() {
         <div className="shell footer-grid">
           <div className="footer-brand">
             <a href="#top" className="brand">
-              <span className="brand-mark" aria-hidden="true">
-                <span className="brand-mark-dot" />
-              </span>
+              <img 
+                src="/media/seversoft_logo.png" 
+                alt="Seversoft Logo" 
+                style={{ width: "28px", height: "28px", borderRadius: "50%", objectFit: "cover" }}
+              />
               <span className="brand-name">Seversoft</span>
             </a>
             <p>
@@ -347,7 +349,7 @@ export default function Home() {
               <a href="https://linkedin.com" target="_blank" rel="noreferrer">
                 LinkedIn
               </a>
-              <a href="mailto:hello@seversofttechnologies.com">Email</a>
+              <a href="mailto:info@seversoftech.com">Email</a>
             </div>
           </div>
 

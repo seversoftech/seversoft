@@ -58,6 +58,22 @@ export default function BuildWithUsPage() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    
+    const subject = `Project Brief from ${data.name}`;
+    const body = `Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Role: ${data.role}
+Communication: ${commChannel}
+Service: ${data.service}
+Budget: ${data.budget}
+Timeline: ${data.timeline}
+Source: ${data.source}
+Message: ${data.message}`;
+
+    window.location.href = `mailto:info@seversoftech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   }
 
@@ -140,7 +156,7 @@ export default function BuildWithUsPage() {
                 Schedule a Call
               </a>
               <a
-                href="https://wa.me/2348000000000"
+                href="https://wa.me/2347049076570"
                 target="_blank"
                 rel="noreferrer"
                 className="button button-whatsapp button-small"
@@ -176,22 +192,22 @@ export default function BuildWithUsPage() {
                 <div className="bwu-row">
                   <div className="bwu-field">
                     <label htmlFor="bwu-name">Full Name *</label>
-                    <input id="bwu-name" type="text" placeholder="e.g. Amina Yusuf" required />
+                    <input id="bwu-name" name="name" type="text" placeholder="e.g. Amina Yusuf" required />
                   </div>
                   <div className="bwu-field">
                     <label htmlFor="bwu-email">Email Address *</label>
-                    <input id="bwu-email" type="email" placeholder="you@company.com" required />
+                    <input id="bwu-email" name="email" type="email" placeholder="you@company.com" required />
                   </div>
                 </div>
 
                 <div className="bwu-row">
                   <div className="bwu-field">
                     <label htmlFor="bwu-phone">Phone Number</label>
-                    <input id="bwu-phone" type="tel" placeholder="+234 800 000 0000" />
+                    <input id="bwu-phone" name="phone" type="tel" placeholder="+234 800 000 0000" />
                   </div>
                   <div className="bwu-field">
                     <label htmlFor="bwu-role">Who are you? *</label>
-                    <select id="bwu-role" required defaultValue="">
+                    <select id="bwu-role" name="role" required defaultValue="">
                       <option value="" disabled>Select your role</option>
                       {roles.map((r) => <option key={r}>{r}</option>)}
                     </select>
@@ -221,14 +237,14 @@ export default function BuildWithUsPage() {
                 <div className="bwu-row">
                   <div className="bwu-field">
                     <label htmlFor="bwu-service">What do you need help with? *</label>
-                    <select id="bwu-service" required defaultValue="">
+                    <select id="bwu-service" name="service" required defaultValue="">
                       <option value="" disabled>Select a service</option>
                       {services.map((s) => <option key={s}>{s}</option>)}
                     </select>
                   </div>
                   <div className="bwu-field">
                     <label htmlFor="bwu-budget">Budget Range</label>
-                    <select id="bwu-budget" defaultValue="">
+                    <select id="bwu-budget" name="budget" defaultValue="">
                       <option value="" disabled>Select budget range</option>
                       {budgets.map((b) => <option key={b}>{b}</option>)}
                     </select>
@@ -238,14 +254,14 @@ export default function BuildWithUsPage() {
                 <div className="bwu-row">
                   <div className="bwu-field">
                     <label htmlFor="bwu-timeline">Timeline</label>
-                    <select id="bwu-timeline" defaultValue="">
+                    <select id="bwu-timeline" name="timeline" defaultValue="">
                       <option value="" disabled>Select timeline</option>
                       {timelines.map((t) => <option key={t}>{t}</option>)}
                     </select>
                   </div>
                   <div className="bwu-field">
                     <label htmlFor="bwu-source">How did you hear about us?</label>
-                    <select id="bwu-source" defaultValue="">
+                    <select id="bwu-source" name="source" defaultValue="">
                       <option value="" disabled>Select an option</option>
                       {sources.map((s) => <option key={s}>{s}</option>)}
                     </select>
@@ -264,6 +280,7 @@ export default function BuildWithUsPage() {
                   <label htmlFor="bwu-message">Tell us about your project *</label>
                   <textarea
                     id="bwu-message"
+                    name="message"
                     rows={4}
                     placeholder="Describe what you're building, your goals, and any key challenges you're facing..."
                     required

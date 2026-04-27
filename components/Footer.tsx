@@ -22,26 +22,18 @@ export default function Footer() {
           {/* Brand */}
           <div style={{ flex: "1 1 300px", maxWidth: "400px" }}>
             <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <div
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  borderRadius: "4px",
-                  background: "var(--color-accent-light)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 16L12 21L20 16V8L12 3L4 8V16Z" stroke="#0a0a0c" strokeWidth="3" strokeLinejoin="round"/>
-                </svg>
-              </div>
+                <img 
+                  src="/media/seversoft_logo.png" 
+                  alt="Seversoft Logo" 
+                  style={{ width: "28px", height: "28px", borderRadius: "50%", objectFit: "cover" }}
+                />
               <span
                 style={{
                   fontSize: "1.2rem",
                   fontWeight: 700,
-                  letterSpacing: "-0.02em",
+                  fontFamily: "'Baron Neue Bold', 'Baron Neue', sans-serif",
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
                   color: "var(--color-text-primary)",
                 }}
               >
