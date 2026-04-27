@@ -35,20 +35,20 @@ const reviews = [
   {
     quote:
       "Seversoft helped us launch a cleaner payment experience in weeks, not months. The platform felt stable from day one.",
-    name: "Amina Yusuf",
-    role: "Operations Lead, Lagos retail brand",
+    name: "Alex Johnson",
+    role: "Operations Lead, Retail Logistics",
   },
   {
     quote:
       "Their team combines fintech understanding with strong engineering discipline. Integration was smooth and support has been excellent.",
-    name: "Tunde Afolabi",
-    role: "Founder, digital services startup",
+    name: "Sarah Williams",
+    role: "Founder, Fintech Startup",
   },
   {
     quote:
       "We needed something reliable, affordable, and scalable. Seversoft delivered all three without adding unnecessary complexity.",
-    name: "Ifeoma Nnadi",
-    role: "Product Manager, business automation firm",
+    name: "Michael Chen",
+    role: "Product Manager, Tech Solutions",
   },
 ];
 
@@ -93,6 +93,7 @@ export default function Home() {
               <span>Software engineering</span>
               <span>AI systems</span>
               <span>Fintech products</span>
+              <span>Registration & Compliance </span>
             </div>
           </div>
 
@@ -186,7 +187,7 @@ export default function Home() {
               <span className="section-kicker kicker-with-dot">Our Ecosystem</span>
               <h2>Powering the next generation of digital infrastructure</h2>
               <p>
-                Seversoft develops high-performance software, AI systems, and fintech infrastructure designed to 
+                Seversoft develops high-performance software, AI systems, and fintech infrastructure designed to
                 scale with modern business demands across every industry.
               </p>
               <ul className="check-list">
@@ -232,7 +233,7 @@ export default function Home() {
             <div className="steps-grid">
               {[
                 ["Account Setup", "Register your enterprise or personal account and verify your identity for secure, full-scale access."],
-                ["Instant Wallet", "Generate a multi-currency business or personal wallet with unique identifiers in seconds."],
+                ["Instant Wallet", "Generate a business or personal wallet with unique identifiers in seconds."],
                 ["Secure Funding", "Load your wallet through multiple payment channels to power your transactions and API tools."],
                 ["Go Live", "Pay bills, automate operations, and connect your products to our high-throughput transaction engine."],
               ].map(([title, text], index) => (

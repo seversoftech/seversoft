@@ -193,7 +193,7 @@ Message: ${data.message}`;
                 <div className="bwu-row">
                   <div className="bwu-field">
                     <label htmlFor="bwu-name">Full Name *</label>
-                    <input id="bwu-name" name="name" type="text" placeholder="e.g. Amina Yusuf" required />
+                    <input id="bwu-name" name="name" type="text" placeholder="e.g. Alex Johnson, Sarah Williams, or Michael Chen" required />
                   </div>
                   <div className="bwu-field">
                     <label htmlFor="bwu-email">Email Address *</label>
