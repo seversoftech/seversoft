@@ -157,6 +157,27 @@ export default function Home() {
               <span>Fintech products</span>
               <span>Registration & Compliance </span>
             </div>
+
+            <div className="hero-status-card reveal reveal-delay-2">
+              <div className="status-header">
+                <span className="status-pulse"></span>
+                <span>Live System Status</span>
+              </div>
+              <div className="status-grid">
+                <div className="status-item">
+                  <span className="status-label">Uptime</span>
+                  <span className="status-value">99.99%</span>
+                </div>
+                <div className="status-item">
+                  <span className="status-label">Avg. Latency</span>
+                  <span className="status-value">1.2ms</span>
+                </div>
+                <div className="status-item">
+                  <span className="status-label">Global Nodes</span>
+                  <span className="status-value">24+</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="hero-content reveal reveal-delay">
