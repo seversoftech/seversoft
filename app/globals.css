@@ -2657,18 +2657,38 @@ p {
   font-size: 1.15rem;
   letter-spacing: -0.02em;
   color: var(--text-muted);
-  opacity: 0.55;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
   position: relative;
   white-space: nowrap;
+  padding: 8px 16px;
+  border-radius: 12px;
+  animation: logo-reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .logo-item:hover {
-  opacity: 1;
+  opacity: 1 !important;
   color: var(--hover-color, var(--text));
-  transform: translateY(-2px);
-  filter: drop-shadow(0 0 10px var(--hover-color, transparent));
+  transform: translateY(-5px) scale(1.05) rotate(1deg);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.3),
+    0 0 20px -5px var(--hover-color, transparent);
+}
+
+.logo-item:hover .partner-logo {
+  opacity: 1 !important;
+  filter: invert(0) brightness(1) drop-shadow(0 0 8px var(--hover-color, transparent)) !important;
+  transform: scale(1.1);
+}
+
+@keyframes logo-reveal {
+  to {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {

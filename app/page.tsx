@@ -53,20 +53,20 @@ const reviews = [
 ];
 
 const partners = [
-  { name: "Paystack", color: "#00a3d9" },
-  { name: "Flutterwave", color: "#fb9129" },
-  { name: "Monnify", color: "#003399" },
-  { name: "AWS", color: "#ff9900" },
-  { name: "Google Cloud", color: "#4285f4" },
-  { name: "OpenAI", color: "#10a37f" },
-  { name: "Twilio", color: "#f22f46" },
-  { name: "Stripe", color: "#635bff" },
-  { name: "Supabase", color: "#3ecf8e" },
-  { name: "OneSignal", color: "#eb4b26" },
-  { name: "Firebase", color: "#ffca28" },
-  { name: "MongoDB", color: "#47a248" },
-  { name: "Redis", color: "#d82c20" },
-  { name: "Cloudinary", color: "#3448c5" },
+  { name: "AWS", color: "#ff9900", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg" },
+  { name: "Cloudinary", color: "#3448c5", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudinary.svg" },
+  { name: "Firebase", color: "#ffca28", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/firebase.svg" },
+  { name: "Flutterwave", color: "#fb9129", logo: "https://www.google.com/s2/favicons?sz=128&domain=flutterwave.com" },
+  { name: "Google Cloud", color: "#4285f4", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" },
+  { name: "MongoDB", color: "#47a248", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mongodb.svg" },
+  { name: "Monnify", color: "#003399", logo: "https://www.google.com/s2/favicons?sz=128&domain=monnify.com" },
+  { name: "OneSignal", color: "#eb4b26", logo: "https://www.google.com/s2/favicons?sz=128&domain=onesignal.com" },
+  { name: "OpenAI", color: "#10a37f", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" },
+  { name: "Paystack", color: "#00a3d9", logo: "https://www.google.com/s2/favicons?sz=128&domain=paystack.com" },
+  { name: "Redis", color: "#d82c20", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/redis.svg" },
+  { name: "Stripe", color: "#635bff", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" },
+  { name: "Supabase", color: "#3ecf8e", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" },
+  { name: "Twilio", color: "#f22f46", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twilio.svg" },
 ];
 
 const codeSnippets = [
@@ -182,7 +182,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-dark" style={{ paddingTop: 0, paddingBottom: "72px" }}>
+      <section className="section section-dark" style={{ paddingTop: "20px", paddingBottom: "72px" }}>
         <div className="shell">
           <div style={{ textAlign: "center", marginBottom: "42px" }}>
             <span style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", opacity: 0.7 }}>
@@ -190,9 +190,14 @@ export default function Home() {
             </span>
           </div>
           <div className="logo-cloud">
-            {partners.map((p) => (
-              <div key={p.name} className="logo-item" style={{ "--hover-color": p.color } as any}>
-                {p.name}
+            {partners.map((p, i) => (
+              <div 
+                key={p.name} 
+                className="logo-item" 
+                style={{ "--hover-color": p.color, animationDelay: `${i * 0.05}s` } as any}
+              >
+                <img src={p.logo} alt={p.name} className="partner-logo" style={{ height: "18px", width: "auto", marginRight: "10px", opacity: 0.6, filter: "invert(1) brightness(2)", transition: "all 0.35s ease" }} />
+                <span>{p.name}</span>
               </div>
             ))}
           </div>
@@ -239,16 +244,16 @@ export default function Home() {
                       <stop offset="100%" stopColor="var(--teal)" stopOpacity="0" />
                     </linearGradient>
                   </defs>
-                  <path 
-                    className="chart-path-area" 
-                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10 L400,150 L0,150 Z" 
+                  <path
+                    className="chart-path-area"
+                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10 L400,150 L0,150 Z"
                     fill="url(#chartGradient)"
                   />
-                  <path 
-                    className="chart-path-line" 
-                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10" 
-                    fill="none" 
-                    stroke="var(--teal)" 
+                  <path
+                    className="chart-path-line"
+                    d="M0,150 Q50,140 100,100 T200,80 T300,40 T400,10"
+                    fill="none"
+                    stroke="var(--teal)"
                     strokeWidth="3"
                   />
                   <circle cx="400" cy="10" r="4" fill="var(--teal)" className="chart-point">
@@ -292,7 +297,7 @@ export default function Home() {
               <span className="section-kicker kicker-with-dot">Developer First</span>
               <h2>Built for builders. Designed for scale.</h2>
               <p style={{ color: "var(--text-soft)", fontSize: "1.1rem", lineHeight: "1.7", marginBottom: "32px" }}>
-                Our infrastructure is built API-first. Integrate payment flows, wallet systems, and automation triggers 
+                Our infrastructure is built API-first. Integrate payment flows, wallet systems, and automation triggers
                 into your existing product with just a few lines of code.
               </p>
               <div style={{ display: "grid", gap: "20px" }}>
@@ -312,7 +317,7 @@ export default function Home() {
               </div>
               <a href="/documentation" className="button button-secondary" style={{ marginTop: "40px" }}>Explore Documentation</a>
             </div>
-            
+
             <div className="terminal-window reveal reveal-delay">
               <div className="terminal-header">
                 <div className="terminal-dots">
