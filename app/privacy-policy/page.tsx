@@ -233,7 +233,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>NDPR</strong> — Nigeria Data Protection Regulation (Federal Republic of Nigeria)</li>
               <li>Other applicable data protection frameworks in jurisdictions where we operate</li>
             </ul>
-            <p>Users in the EEA, California, or Nigeria may have additional rights under their respective laws. Please contact us to exercise those rights.</p>
+            <p>Users in the EEA, California, or Africa may have additional rights under their respective laws. Please contact us to exercise those rights.</p>
           </div>
         </div>
       </section>

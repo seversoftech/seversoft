@@ -119,7 +119,7 @@ export default function TermsPage() {
 
             <h2>12. Governing Law</h2>
             <p>
-              These Terms of Service are governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any disputes arising under or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of Nigeria, unless otherwise agreed in writing.
+              These Terms of Service are governed by and construed in accordance with the laws of Africa. Any disputes arising under or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of Africa, unless otherwise agreed in writing.
             </p>
 
             <h2>11. Indemnification</h2>

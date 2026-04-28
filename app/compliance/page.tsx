@@ -28,7 +28,7 @@ export default function CompliancePage() {
             </p>
             <ul>
               <li>
-                <strong>NDPR</strong> — Nigeria Data Protection Regulation, enforced by the Nigeria Data Protection Commission (NDPC). As a Nigeria-based technology company, NDPR compliance is our primary regulatory obligation.
+                <strong>NDPR</strong> — Nigeria Data Protection Regulation, enforced by the Nigeria Data Protection Commission (NDPC). As an Africa-based technology company, NDPR compliance is our primary regulatory obligation.
               </li>
               <li>
                 <strong>GDPR</strong> — General Data Protection Regulation (European Union). We apply GDPR-aligned data practices for any clients, users, or partners located in the EEA.
