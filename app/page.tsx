@@ -72,18 +72,22 @@ const partners = [
 const codeSnippets = [
   {
     label: "Payments",
-    lang: "javascript",
-    code: `// Initialize a high-throughput transfer
-const transfer = await seversoft.payments.create({
-  amount: 250000,
-  currency: "NGN",
-  source: "wallet_abc123",
-  destination: "bank_xyz789",
-  reference: "TXN_99012"
-});
+    lang: "typescript",
+    code: `import { usePayments } from "@seversoft/react";
 
-console.log(transfer.status); // 'pending'
-`,
+export function PayButton() {
+  const { initiate, status } = usePayments();
+
+  return (
+    <button onClick={() => initiate({
+      amount: 250000,
+      currency: "NGN",
+      recipient: "bank_xyz789"
+    })}>
+      Pay with Seversoft {status === 'processing' && '...'}
+    </button>
+  );
+}`,
   },
   {
     label: "Wallets",
@@ -344,7 +348,7 @@ export default function Home() {
                 <div className="terminal-dots">
                   <span /> <span /> <span />
                 </div>
-                <div className="terminal-title">seversoft-api-preview.js</div>
+                <div className="terminal-title">PayButton.tsx</div>
               </div>
               <div className="terminal-body">
                 <pre>
