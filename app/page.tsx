@@ -72,22 +72,21 @@ const partners = [
 const codeSnippets = [
   {
     label: "Payments",
-    lang: "typescript",
-    code: `import { usePayments } from "@seversoft/react";
+    lang: "javascript",
+    code: `const express = require('express');
+const { seversoft } = require('@seversoft/sdk');
+const app = express();
 
-export function PayButton() {
-  const { initiate, status } = usePayments();
-
-  return (
-    <button onClick={() => initiate({
-      amount: 250000,
-      currency: "NGN",
-      recipient: "bank_xyz789"
-    })}>
-      Pay with Seversoft {status === 'processing' && '...'}
-    </button>
-  );
-}`,
+// Create a high-throughput payment endpoint
+app.post('/api/pay', async (req, res) => {
+  const payment = await seversoft.payments.create({
+    amount: req.body.amount,
+    currency: 'NGN',
+    recipient: req.body.bankCode
+  });
+  
+  res.status(201).json(payment);
+});`,
   },
   {
     label: "Wallets",
@@ -348,7 +347,7 @@ export default function Home() {
                 <div className="terminal-dots">
                   <span /> <span /> <span />
                 </div>
-                <div className="terminal-title">PayButton.tsx</div>
+                <div className="terminal-title">server.js</div>
               </div>
               <div className="terminal-body">
                 <pre>
