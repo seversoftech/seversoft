@@ -15,6 +15,7 @@ import {
   logoutAction,
   updatePostAction,
 } from "./actions";
+import { PasswordInput } from "./PasswordInput";
 
 const emptyDraft = {
   title: "",
@@ -137,7 +138,7 @@ export default async function OpsAdminPage({
 
           <form action={loginAction} className="ops-login-form">
             <label htmlFor="ops-password">Password</label>
-            <input id="ops-password" name="password" type="password" placeholder="Enter admin password" autoComplete="current-password" />
+            <PasswordInput />
             {error && <span className="ops-error">Invalid admin password.</span>}
             <button className="button button-primary" type="submit">
               Open Dashboard
