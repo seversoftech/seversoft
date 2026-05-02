@@ -16,6 +16,7 @@ import {
   updatePostAction,
 } from "./actions";
 import { PasswordInput } from "./PasswordInput";
+import { AIGenerator } from "./AIGenerator";
 
 const emptyDraft = {
   title: "",
@@ -48,6 +49,7 @@ function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
 
   return (
     <>
+      <AIGenerator id={post.id ?? "new"} />
       {"id" in post && post.id && <input type="hidden" name="id" value={post.id} />}
       <div className="ops-field">
         <label htmlFor={`title-${post.id ?? "new"}`}>Title</label>
