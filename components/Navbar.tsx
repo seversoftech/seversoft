@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const navLinks = [
@@ -30,6 +32,17 @@ const exploreLinks = [
       </svg>
     ),
   },
+  {
+    label: "Blog",
+    href: "/blog",
+    desc: "Articles, ideas & build notes",
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5V5a2 2 0 0 1 2-2h11a3 3 0 0 1 3 3v14H6a2 2 0 0 1-2-2.5Z" />
+        <path d="M8 7h8M8 11h8M8 15h5" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" }) {
@@ -46,20 +59,22 @@ export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" })
     <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${theme === "light" ? "header-light" : ""}`}>
       <div className="shell">
         <nav className="nav">
-          <a href="/" className="brand">
-            <img
+          <Link href="/" className="brand">
+            <Image
               src="/media/seversoft_logo.png"
               alt="Seversoft Logo"
+              width={32}
+              height={32}
               className="brand-logo"
               style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
             />
             <span className="brand-name">Seversoft</span>
-          </a>
+          </Link>
 
           <ul className="nav-links nav-links-desktop">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
+                <Link href={link.href}>{link.label}</Link>
               </li>
             ))}
 
@@ -76,13 +91,13 @@ export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" })
                 <div className="nav-dropdown-inner">
                   <div className="nav-dropdown-group">
                     {exploreLinks.map((item) => (
-                      <a key={item.label} href={item.href} className="nav-dropdown-link">
+                      <Link key={item.label} href={item.href} className="nav-dropdown-link">
                         <span className="nav-dropdown-icon">{item.icon}</span>
                         <span className="nav-dropdown-text">
                           <span className="nav-dropdown-link-title">{item.label}</span>
                           <span className="nav-dropdown-link-desc">{item.desc}</span>
                         </span>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -91,9 +106,9 @@ export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" })
           </ul>
 
           <div className="nav-cta nav-cta-desktop">
-            <a href="/build-with-us" className="button button-primary button-small">
+            <Link href="/build-with-us" className="button button-primary button-small">
               Build With Us
-            </a>
+            </Link>
           </div>
 
           <button
@@ -111,33 +126,33 @@ export default function Navbar({ theme = "dark" }: { theme?: "dark" | "light" })
         {/* Mobile menu */}
         <div className={`mobile-menu ${mobileOpen ? "is-open" : ""}`}>
           {navLinks.map((link, index) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           {exploreLinks.map((item, i) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
               onClick={() => setMobileOpen(false)}
               style={{ transitionDelay: `${(navLinks.length + i + 1) * 50}ms` }}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href="/build-with-us"
             className="button button-primary"
             onClick={() => setMobileOpen(false)}
             style={{ transitionDelay: `${(navLinks.length + exploreLinks.length + 1) * 50}ms` }}
           >
             Build With Us
-          </a>
+          </Link>
         </div>
       </div>
     </header>

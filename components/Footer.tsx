@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 const footerLinks = {
   company: [
@@ -27,9 +28,11 @@ export default function Footer() {
       <div className="shell footer-grid">
         <div className="footer-brand">
           <a href="#top" className="brand">
-            <img 
+            <Image
               src="/media/seversoft_logo.png" 
               alt="Seversoft Logo" 
+              width={28}
+              height={28}
               style={{ width: "28px", height: "28px", borderRadius: "50%", objectFit: "cover" }}
             />
             <span className="brand-name">Seversoft</span>
@@ -54,9 +57,9 @@ export default function Footer() {
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {links.map((link) => (
-                <a key={link.label} href={link.href} style={{ color: "var(--text-soft)", fontSize: "0.9rem" }}>
+                <Link key={link.label} href={link.href} style={{ color: "var(--text-soft)", fontSize: "0.9rem" }}>
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

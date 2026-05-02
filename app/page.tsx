@@ -1,6 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServicesFlashcards from "@/components/ServicesFlashcards";
+import Image from "next/image";
+import type { CSSProperties } from "react";
+
+type PartnerLogoStyle = CSSProperties & {
+  "--hover-color": string;
+};
 
 const coreCapabilities = [
   "Web, mobile, desktop, and cross-platform software solutions",
@@ -218,9 +224,17 @@ export default function Home() {
               <div 
                 key={p.name} 
                 className="logo-item" 
-                style={{ "--hover-color": p.color, animationDelay: `${i * 0.05}s` } as any}
+                style={{ "--hover-color": p.color, animationDelay: `${i * 0.05}s` } as PartnerLogoStyle}
               >
-                <img src={p.logo} alt={p.name} className="partner-logo" style={{ height: "18px", width: "auto", marginRight: "10px", opacity: 0.6, filter: "invert(1) brightness(2)", transition: "all 0.35s ease" }} />
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  width={18}
+                  height={18}
+                  className="partner-logo"
+                  unoptimized
+                  style={{ height: "18px", width: "auto", marginRight: "10px", opacity: 0.6, filter: "invert(1) brightness(2)", transition: "all 0.35s ease" }}
+                />
                 <span>{p.name}</span>
               </div>
             ))}
@@ -297,9 +311,12 @@ export default function Home() {
             </p>
 
             <figure className="impact-photo">
-              <img
+              <Image
                 src="/media/it_collaborators.png"
                 alt="A diverse group of happy IT collaborators working together in a modern office"
+                width={720}
+                height={480}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </figure>
 
@@ -482,7 +499,7 @@ export default function Home() {
               propels your business forward.
             </p>
             <a className="button button-primary" href="/build-with-us">
-              Let's Talk
+              Let&apos;s Talk
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"

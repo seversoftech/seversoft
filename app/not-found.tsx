@@ -16,7 +16,7 @@ export default function NotFound() {
             </h1>
             <p style={{ maxWidth: "580px", margin: "0 auto 48px", color: "var(--text-soft)", fontSize: "1.15rem", lineHeight: "1.7" }}>
               The page you are looking for has drifted out of orbit or never existed. 
-              Let's navigate you back to safe infrastructure.
+              Let&apos;s navigate you back to safe infrastructure.
             </p>
             <div style={{ display: "flex", gap: "12px", justifyContent: "center", alignItems: "center" }}>
               <Link href="/" className="button button-primary" style={{ padding: "0 16px", fontSize: "0.9rem", flex: 1, maxWidth: "200px", whiteSpace: "nowrap" }}>

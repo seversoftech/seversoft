@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -179,9 +180,9 @@ Message: ${data.message}`;
                 <p>
                   We&apos;ve got your details and will be in touch within 24 hours. Expect something great.
                 </p>
-                <a href="/" className="button button-primary" style={{ marginTop: "24px" }}>
+                <Link href="/" className="button button-primary" style={{ marginTop: "24px" }}>
                   Back to Home
-                </a>
+                </Link>
               </div>
             ) : (
               <form className="bwu-form frame-card" onSubmit={handleSubmit} noValidate>
