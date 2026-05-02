@@ -93,7 +93,11 @@ async function supabaseFetch<T>(path: string, init: RequestInit = {}, { admin = 
   }
 
   if (response.status === 204) return null as T;
-  return response.json() as Promise<T>;
+  
+  const text = await response.text();
+  if (!text) return null as T;
+  
+  return JSON.parse(text) as T;
 }
 
 function formatDate(value: string | null) {
