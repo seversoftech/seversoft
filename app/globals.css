@@ -3060,3 +3060,381 @@ p {
     border-radius: 18px !important;
   }
 }
+
+/* ── Ops admin ─────────────────────────────────────────────── */
+
+.ops-page {
+  min-height: 100vh;
+  padding: 40px;
+  background:
+    radial-gradient(circle at 8% 5%, rgba(143, 198, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 92% 10%, rgba(79, 210, 195, 0.1), transparent 24%),
+    linear-gradient(180deg, #090d11 0%, #0e1318 100%);
+  color: var(--text);
+}
+
+.ops-login-page {
+  display: grid;
+  place-items: center;
+}
+
+.ops-login-card {
+  width: min(100%, 520px);
+  padding: 38px;
+}
+
+.ops-login-card h1,
+.ops-header h1,
+.ops-panel h2 {
+  color: var(--text);
+}
+
+.ops-login-card h1 {
+  margin: 10px 0 12px;
+  font-size: clamp(2.3rem, 8vw, 4rem);
+}
+
+.ops-login-card p,
+.ops-header p,
+.ops-muted {
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.ops-login-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.ops-login-form label,
+.ops-field label {
+  color: var(--text-soft);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.ops-login-form input,
+.ops-field input,
+.ops-field select,
+.ops-field textarea {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  padding: 12px 14px;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.94rem;
+  outline: none;
+}
+
+.ops-login-form input:focus,
+.ops-field input:focus,
+.ops-field select:focus,
+.ops-field textarea:focus {
+  border-color: var(--blue-strong);
+  box-shadow: 0 0 0 4px rgba(94, 174, 254, 0.12);
+}
+
+.ops-field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.ops-content-input {
+  min-height: 210px !important;
+}
+
+.ops-error {
+  color: #fca5a5;
+  font-size: 0.85rem;
+}
+
+.ops-notice {
+  display: inline-flex;
+  color: var(--teal);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ops-back-link {
+  display: inline-flex;
+  margin-top: 22px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ops-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 0 auto 28px;
+  max-width: 1280px;
+}
+
+.ops-header h1 {
+  margin: 12px 0;
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+}
+
+.ops-header-actions,
+.ops-form-actions,
+.ops-post-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ops-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto 18px;
+}
+
+.ops-stat-card {
+  padding: 22px;
+}
+
+.ops-stat-card span,
+.ops-panel-heading span {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ops-stat-card strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.2rem;
+}
+
+.ops-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: 18px;
+  max-width: 1280px;
+  margin: 0 auto 18px;
+}
+
+.ops-panel {
+  padding: 26px;
+}
+
+.ops-page > .ops-panel {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.ops-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.ops-panel-heading h2 {
+  margin: 8px 0 0;
+  font-size: 1.45rem;
+}
+
+.ops-editor {
+  display: grid;
+  gap: 16px;
+}
+
+.ops-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ops-field {
+  display: grid;
+  gap: 8px;
+}
+
+.ops-side {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.ops-text-button,
+.ops-action-list button,
+.ops-post-actions button {
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-soft);
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ops-text-button:hover,
+.ops-action-list button:hover,
+.ops-post-actions button:hover {
+  color: var(--text);
+  border-color: rgba(143, 198, 255, 0.32);
+}
+
+.ops-action-list,
+.ops-activity-list,
+.ops-settings-list,
+.ops-post-list {
+  display: grid;
+  gap: 12px;
+}
+
+.ops-action-list button {
+  width: 100%;
+  text-align: left;
+}
+
+.ops-activity-item {
+  border-left: 2px solid var(--teal);
+  padding-left: 12px;
+}
+
+.ops-activity-item strong {
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.ops-activity-item p {
+  margin: 4px 0;
+  color: var(--text-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.ops-activity-item span,
+.ops-post-meta {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.ops-settings-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
+.ops-post-list {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.ops-post-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.ops-post-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.ops-post-item h3 {
+  color: var(--text);
+  margin: 12px 0 8px;
+  font-size: 1.25rem;
+}
+
+.ops-post-item p {
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+.ops-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ops-status {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ops-status-published {
+  background: rgba(79, 210, 195, 0.13);
+  color: var(--teal);
+}
+
+.ops-status-draft {
+  background: rgba(143, 198, 255, 0.13);
+  color: var(--blue);
+}
+
+.ops-status-review {
+  background: rgba(155, 120, 255, 0.13);
+  color: var(--purple);
+}
+
+@media (max-width: 980px) {
+  .ops-page {
+    padding: 24px;
+  }
+
+  .ops-header,
+  .ops-grid,
+  .ops-post-item {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-header {
+    display: grid;
+  }
+
+  .ops-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .ops-page {
+    padding: 16px;
+  }
+
+  .ops-login-card,
+  .ops-panel,
+  .ops-stat-card {
+    padding: 20px;
+  }
+
+  .ops-stats,
+  .ops-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-header-actions,
+  .ops-form-actions,
+  .ops-post-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
