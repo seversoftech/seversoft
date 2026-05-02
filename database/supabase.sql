@@ -48,7 +48,7 @@ values
   '[{"heading":"Reliability starts with the ledger","paragraphs":["A payment system can have a beautiful interface and fast APIs, but the ledger is where trust is either protected or lost. Every credit, debit, reversal, and fee needs a clear record that can be audited without guesswork.","At scale, teams need to design for idempotency, duplicate prevention, and clear transaction states from the beginning. These are not polish items. They are the core mechanics that keep balances accurate when traffic spikes or partner systems respond slowly."]}]'::jsonb,
   'Reliable systems are designed before traffic arrives.',
   'published',
-  '5 min read',
+  '1 min read',
   true,
   now()
 )
