@@ -12,13 +12,13 @@ export default function BlogPage() {
     <main id="top">
       <Navbar />
 
-      <section className="section section-dark ecosystem-hero" style={{ paddingTop: "90px", paddingBottom: "90px" }}>
-        <div className="shell" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
+      <section className="section section-dark ecosystem-hero blog-hero" style={{ paddingTop: "90px", paddingBottom: "90px" }}>
+        <div className="shell blog-hero-shell" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
           <span className="section-kicker kicker-with-dot">Seversoft Blog</span>
           <h1 style={{ marginTop: "20px", marginBottom: "20px" }}>
             Notes on building <span className="text-gradient">systems that scale.</span>
           </h1>
-          <p style={{ color: "var(--text-soft)", fontSize: "1.08rem", lineHeight: "1.8", margin: "0 auto", maxWidth: "680px" }}>
+          <p className="blog-hero-copy" style={{ color: "var(--text-soft)", fontSize: "1.08rem", lineHeight: "1.8", margin: "0 auto", maxWidth: "680px" }}>
             Practical ideas on software delivery, fintech infrastructure, AI automation, compliance, and the engineering choices behind dependable digital products.
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function BlogPage() {
       <section className="section section-light" style={{ paddingTop: "76px" }}>
         <div className="shell">
           <article
-            className="frame-card"
+            className="frame-card blog-featured-card"
             style={{
               display: "grid",
               gridTemplateColumns: "minmax(0, 1.25fr) minmax(260px, 0.75fr)",
@@ -38,14 +38,14 @@ export default function BlogPage() {
               borderColor: "rgba(15,20,26,0.08)",
             }}
           >
-            <div>
+            <div className="blog-featured-copy">
               <span className="store-tag">{featuredPost.category}</span>
               <Link href={`/blog/${featuredPost.slug}`}>
-                <h2 style={{ color: "var(--text-dark)", fontSize: "clamp(2rem, 4vw, 3.1rem)", marginTop: "18px" }}>
+                <h2 className="blog-featured-title" style={{ color: "var(--text-dark)", fontSize: "clamp(2rem, 4vw, 3.1rem)", marginTop: "18px" }}>
                   {featuredPost.title}
                 </h2>
               </Link>
-              <p style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.8", maxWidth: "680px", marginBottom: "26px" }}>
+              <p className="blog-featured-excerpt" style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.8", maxWidth: "680px", marginBottom: "26px" }}>
                 {featuredPost.excerpt}
               </p>
               <Link href={`/blog/${featuredPost.slug}`} className="button button-primary">
@@ -54,6 +54,7 @@ export default function BlogPage() {
             </div>
 
             <div
+              className="blog-featured-aside"
               style={{
                 display: "grid",
                 alignContent: "end",
@@ -69,7 +70,7 @@ export default function BlogPage() {
               <span style={{ color: "var(--text-soft)", fontSize: "0.82rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
                 Featured
               </span>
-              <strong style={{ fontSize: "1.6rem", lineHeight: "1.1", marginTop: "12px" }}>{featuredPost.callout}</strong>
+              <strong className="blog-featured-callout" style={{ fontSize: "1.6rem", lineHeight: "1.1", marginTop: "12px" }}>{featuredPost.callout}</strong>
               <span style={{ color: "var(--text-muted)", marginTop: "20px", fontSize: "0.92rem" }}>
                 {featuredPost.date} / {featuredPost.readTime}
               </span>
@@ -88,11 +89,11 @@ export default function BlogPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "22px" }}>
+          <div className="blog-post-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "22px" }}>
             {posts.map((post) => (
               <article
                 key={post.title}
-                className="frame-card"
+                className="frame-card blog-card"
                 style={{
                   padding: "28px",
                   background: "#fff",
@@ -102,10 +103,10 @@ export default function BlogPage() {
               >
                 <span className="store-tag">{post.category}</span>
                 <Link href={`/blog/${post.slug}`}>
-                  <h3 style={{ color: "var(--text-dark)", fontSize: "1.35rem", marginTop: "18px" }}>{post.title}</h3>
+                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "1.35rem", marginTop: "18px" }}>{post.title}</h3>
                 </Link>
-                <p style={{ color: "#475569", lineHeight: "1.75", fontSize: "0.95rem", marginBottom: "24px" }}>{post.excerpt}</p>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", color: "#64748b", fontSize: "0.84rem", fontWeight: 700 }}>
+                <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.75", fontSize: "0.95rem", marginBottom: "24px" }}>{post.excerpt}</p>
+                <div className="blog-meta-row" style={{ display: "flex", gap: "10px", flexWrap: "wrap", color: "#64748b", fontSize: "0.84rem", fontWeight: 700 }}>
                   <span>{post.date}</span>
                   <span>/</span>
                   <span>{post.readTime}</span>
@@ -118,12 +119,12 @@ export default function BlogPage() {
 
       <section className="section section-dark" style={{ paddingTop: "72px" }}>
         <div className="shell">
-          <div className="frame-card" style={{ padding: "32px" }}>
+          <div className="frame-card blog-topic-panel" style={{ padding: "32px" }}>
             <div className="section-heading compact">
               <span className="section-kicker kicker-with-dot">Topics</span>
               <h2>Explore what we write about</h2>
             </div>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <div className="blog-topic-list" style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               {topics.map((topic) => (
                 <span
                   key={topic}

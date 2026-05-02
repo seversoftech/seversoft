@@ -271,7 +271,7 @@ export default function Home() {
               <h3>We build for real progress</h3>
               <p>
                 We create practical digital solutions that solve meaningful problems, open new opportunities, and help
-                ambitious teams grow with confidence.
+                ambitious teams grow with confidence...
               </p>
 
               <div className="visual-progress-chart">
