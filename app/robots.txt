@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://seversoft.tech/sitemap.xml
+Sitemap: https://seversoftech.com/sitemap.xml

@@ -2,19 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { blogPosts, getBlogPost } from "../posts";
+import { getPublishedPost, getPublishedPosts } from "@/lib/blog";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPublishedPost(slug);
 
   if (!post) {
     return {
@@ -30,13 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPublishedPost(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const relatedPosts = (await getPublishedPosts()).filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
     <main id="top">

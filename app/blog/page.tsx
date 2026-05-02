@@ -1,13 +1,17 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { blogPosts } from "./posts";
+import { getPublishedPosts } from "@/lib/blog";
 
-const featuredPost = blogPosts.find((post) => post.featured) ?? blogPosts[0];
-const posts = blogPosts.filter((post) => post.slug !== featuredPost.slug);
 const topics = ["Fintech", "AI Automation", "Product Strategy", "Compliance", "APIs", "Cloud Infrastructure"];
 
-export default function BlogPage() {
+export const revalidate = 60;
+
+export default async function BlogPage() {
+  const blogPosts = await getPublishedPosts();
+  const featuredPost = blogPosts.find((post) => post.featured) ?? blogPosts[0];
+  const posts = blogPosts.filter((post) => post.slug !== featuredPost.slug);
+
   return (
     <main id="top">
       <Navbar />

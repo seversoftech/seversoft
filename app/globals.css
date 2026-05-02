@@ -3147,6 +3147,7 @@ p {
 }
 
 .ops-error {
+  display: inline-flex;
   color: #fca5a5;
   font-size: 0.85rem;
 }
@@ -3234,6 +3235,18 @@ p {
   margin: 0 auto;
 }
 
+.ops-banner {
+  max-width: 1280px;
+  margin: 0 auto 18px;
+  padding: 16px 18px;
+  color: var(--teal);
+  font-weight: 800;
+}
+
+.ops-banner-warning {
+  color: #fbbf24;
+}
+
 .ops-panel-heading {
   display: flex;
   justify-content: space-between;
@@ -3271,7 +3284,8 @@ p {
 
 .ops-text-button,
 .ops-action-list button,
-.ops-post-actions button {
+.ops-post-actions button,
+.ops-delete-form button {
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.05);
@@ -3285,9 +3299,25 @@ p {
 
 .ops-text-button:hover,
 .ops-action-list button:hover,
-.ops-post-actions button:hover {
+.ops-post-actions button:hover,
+.ops-delete-form button:hover {
   color: var(--text);
   border-color: rgba(143, 198, 255, 0.32);
+}
+
+.ops-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.ops-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--teal);
 }
 
 .ops-action-list,
@@ -3340,9 +3370,6 @@ p {
 }
 
 .ops-post-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 20px;
   padding: 20px 0;
   border-top: 1px solid var(--line);
 }
@@ -3356,6 +3383,46 @@ p {
   color: var(--text);
   margin: 12px 0 8px;
   font-size: 1.25rem;
+}
+
+.ops-post-item summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ops-post-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.ops-post-item summary strong {
+  color: var(--text);
+  min-width: 0;
+}
+
+.ops-post-item summary > span:last-child {
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.ops-inline-editor {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.ops-delete-form {
+  margin-top: 14px;
+}
+
+.ops-delete-form button {
+  color: #fca5a5;
 }
 
 .ops-post-item p {
@@ -3401,8 +3468,7 @@ p {
   }
 
   .ops-header,
-  .ops-grid,
-  .ops-post-item {
+  .ops-grid {
     grid-template-columns: 1fr;
   }
 
@@ -3435,6 +3501,10 @@ p {
   .ops-form-actions,
   .ops-post-actions {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ops-post-item summary {
     grid-template-columns: 1fr;
   }
 }

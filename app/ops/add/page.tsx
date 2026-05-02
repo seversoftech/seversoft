@@ -1,201 +1,127 @@
-"use client";
-
-import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { blogPosts } from "@/app/blog/posts";
+import {
+  contentToText,
+  getAdminPosts,
+  getAuditLogs,
+  getBlogBackendStatus,
+  slugify,
+  type AdminPost,
+} from "@/lib/blog";
+import {
+  createPostAction,
+  deletePostAction,
+  isAdminAuthed,
+  loginAction,
+  logoutAction,
+  updatePostAction,
+} from "./actions";
 
-type ManagedPost = {
-  id: string;
-  title: string;
-  slug: string;
-  category: string;
-  excerpt: string;
-  content: string;
-  status: "Draft" | "Published" | "Review";
-  readTime: string;
-  updatedAt: string;
-};
-
-type ActivityItem = {
-  id: string;
-  action: string;
-  detail: string;
-  at: string;
-};
-
-const ACCESS_KEY = "seversoft-ops-2026";
-const POSTS_KEY = "seversoft-ops-posts";
-const AUTH_KEY = "seversoft-ops-auth";
-const ACTIVITY_KEY = "seversoft-ops-activity";
-
-const emptyForm = {
-  id: "",
+const emptyDraft = {
   title: "",
   slug: "",
   category: "Software Engineering",
   excerpt: "",
+  callout: "",
   content: "",
-  status: "Draft" as ManagedPost["status"],
+  status: "draft" as AdminPost["status"],
   readTime: "4 min read",
+  featured: false,
 };
 
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+type PostFieldsInput = Partial<Omit<AdminPost, "content">> & {
+  content?: AdminPost["content"] | string;
+};
 
-function seedPosts(): ManagedPost[] {
-  return blogPosts.map((post) => ({
-    id: post.slug,
-    title: post.title,
-    slug: post.slug,
-    category: post.category,
-    excerpt: post.excerpt,
-    content: post.content.flatMap((section) => [section.heading, ...section.paragraphs]).join("\n\n"),
-    status: post.featured ? "Published" : "Review",
-    readTime: post.readTime,
-    updatedAt: post.date,
-  }));
-}
-
-function nowLabel() {
+function formatAuditDate(value: string) {
   return new Intl.DateTimeFormat("en", {
     month: "short",
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-  }).format(new Date());
+  }).format(new Date(value));
 }
 
-export default function OpsAdminPage() {
-  const [isReady, setIsReady] = useState(false);
-  const [isAuthed, setIsAuthed] = useState(false);
-  const [accessKey, setAccessKey] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const [posts, setPosts] = useState<ManagedPost[]>([]);
-  const [activity, setActivity] = useState<ActivityItem[]>([]);
-  const [form, setForm] = useState(emptyForm);
-  const [notice, setNotice] = useState("");
+function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
+  const content = "content" in post && Array.isArray(post.content) ? contentToText(post.content) : post.content ?? "";
+  const title = post.title ?? "";
 
-  useEffect(() => {
-    const storedAuth = window.localStorage.getItem(AUTH_KEY);
-    const storedPosts = window.localStorage.getItem(POSTS_KEY);
-    const storedActivity = window.localStorage.getItem(ACTIVITY_KEY);
+  return (
+    <>
+      {"id" in post && post.id && <input type="hidden" name="id" value={post.id} />}
+      <div className="ops-field">
+        <label htmlFor={`title-${post.id ?? "new"}`}>Title</label>
+        <input id={`title-${post.id ?? "new"}`} name="title" defaultValue={title} placeholder="How to build reliable fintech systems" required />
+      </div>
 
-    setIsAuthed(storedAuth === "true");
-    setPosts(storedPosts ? JSON.parse(storedPosts) : seedPosts());
-    setActivity(
-      storedActivity
-        ? JSON.parse(storedActivity)
-        : [
-            {
-              id: "seed",
-              action: "Workspace loaded",
-              detail: "Seeded admin workspace with current blog content.",
-              at: nowLabel(),
-            },
-          ],
-    );
-    setIsReady(true);
-  }, []);
+      <div className="ops-row">
+        <div className="ops-field">
+          <label htmlFor={`slug-${post.id ?? "new"}`}>Slug</label>
+          <input id={`slug-${post.id ?? "new"}`} name="slug" defaultValue={post.slug || slugify(title)} placeholder="reliable-fintech-systems" required />
+        </div>
+        <div className="ops-field">
+          <label htmlFor={`readTime-${post.id ?? "new"}`}>Read Time</label>
+          <input id={`readTime-${post.id ?? "new"}`} name="readTime" defaultValue={post.readTime ?? "4 min read"} required />
+        </div>
+      </div>
 
-  useEffect(() => {
-    if (!isReady) return;
-    window.localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
-  }, [isReady, posts]);
+      <div className="ops-row">
+        <div className="ops-field">
+          <label htmlFor={`category-${post.id ?? "new"}`}>Category</label>
+          <select id={`category-${post.id ?? "new"}`} name="category" defaultValue={post.category ?? "Software Engineering"}>
+            <option>Software Engineering</option>
+            <option>Fintech Infrastructure</option>
+            <option>AI Systems</option>
+            <option>Compliance</option>
+            <option>Product Strategy</option>
+          </select>
+        </div>
+        <div className="ops-field">
+          <label htmlFor={`status-${post.id ?? "new"}`}>Status</label>
+          <select id={`status-${post.id ?? "new"}`} name="status" defaultValue={post.status ?? "draft"}>
+            <option value="draft">Draft</option>
+            <option value="review">Review</option>
+            <option value="published">Published</option>
+          </select>
+        </div>
+      </div>
 
-  useEffect(() => {
-    if (!isReady) return;
-    window.localStorage.setItem(ACTIVITY_KEY, JSON.stringify(activity.slice(0, 8)));
-  }, [activity, isReady]);
+      <div className="ops-field">
+        <label htmlFor={`callout-${post.id ?? "new"}`}>Callout</label>
+        <input id={`callout-${post.id ?? "new"}`} name="callout" defaultValue={post.callout ?? ""} placeholder="A short article insight." />
+      </div>
 
-  const stats = useMemo(() => {
-    const published = posts.filter((post) => post.status === "Published").length;
-    const drafts = posts.filter((post) => post.status === "Draft").length;
-    const review = posts.filter((post) => post.status === "Review").length;
-    return [
-      { label: "Published", value: published },
-      { label: "Drafts", value: drafts },
-      { label: "In Review", value: review },
-      { label: "Total Posts", value: posts.length },
-    ];
-  }, [posts]);
+      <div className="ops-field">
+        <label htmlFor={`excerpt-${post.id ?? "new"}`}>Excerpt</label>
+        <textarea id={`excerpt-${post.id ?? "new"}`} name="excerpt" defaultValue={post.excerpt ?? ""} required />
+      </div>
 
-  function record(action: string, detail: string) {
-    setActivity((items) => [{ id: crypto.randomUUID(), action, detail, at: nowLabel() }, ...items].slice(0, 8));
-  }
+      <div className="ops-field">
+        <label htmlFor={`content-${post.id ?? "new"}`}>Content</label>
+        <textarea
+          id={`content-${post.id ?? "new"}`}
+          name="content"
+          className="ops-content-input"
+          defaultValue={content}
+          placeholder={"Heading\n\nParagraph text\n\n---\n\nNext heading\n\nMore text"}
+          required
+        />
+      </div>
 
-  function handleLogin(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (accessKey !== ACCESS_KEY) {
-      setLoginError("Invalid access key.");
-      return;
-    }
+      <label className="ops-check">
+        <input type="checkbox" name="featured" defaultChecked={Boolean(post.featured)} />
+        Feature this post
+      </label>
+    </>
+  );
+}
 
-    window.localStorage.setItem(AUTH_KEY, "true");
-    setIsAuthed(true);
-    setLoginError("");
-    record("Admin login", "Ops workspace session started.");
-  }
-
-  function handleLogout() {
-    window.localStorage.removeItem(AUTH_KEY);
-    setIsAuthed(false);
-    setAccessKey("");
-    record("Admin logout", "Ops workspace session ended.");
-  }
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const slug = form.slug || slugify(form.title);
-    const nextPost: ManagedPost = {
-      ...form,
-      id: form.id || crypto.randomUUID(),
-      slug,
-      updatedAt: nowLabel(),
-    };
-
-    if (!nextPost.title || !nextPost.excerpt || !nextPost.content || !nextPost.slug) {
-      setNotice("Add a title, slug, excerpt, and content before saving.");
-      return;
-    }
-
-    setPosts((items) => {
-      const exists = items.some((item) => item.id === nextPost.id);
-      return exists ? items.map((item) => (item.id === nextPost.id ? nextPost : item)) : [nextPost, ...items];
-    });
-    record(form.id ? "Post updated" : "Post created", nextPost.title);
-    setNotice(form.id ? "Blog post updated." : "Blog post created.");
-    setForm(emptyForm);
-  }
-
-  function editPost(post: ManagedPost) {
-    setForm(post);
-    setNotice(`Editing ${post.title}`);
-  }
-
-  function deletePost(post: ManagedPost) {
-    setPosts((items) => items.filter((item) => item.id !== post.id));
-    record("Post deleted", post.title);
-    if (form.id === post.id) setForm(emptyForm);
-    setNotice("Blog post deleted.");
-  }
-
-  function resetWorkspace() {
-    const seeded = seedPosts();
-    setPosts(seeded);
-    setForm(emptyForm);
-    record("Workspace reset", "Restored admin blog content from source posts.");
-    setNotice("Workspace reset to seeded blog content.");
-  }
-
-  if (!isReady) {
-    return <main className="ops-page">Loading ops workspace...</main>;
-  }
+export default async function OpsAdminPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string; saved?: string }>;
+}) {
+  const [{ error, saved }, isAuthed] = await Promise.all([searchParams, isAdminAuthed()]);
+  const backendStatus = getBlogBackendStatus();
 
   if (!isAuthed) {
     return (
@@ -203,19 +129,16 @@ export default function OpsAdminPage() {
         <section className="ops-login-card frame-card">
           <span className="section-kicker kicker-with-dot">Admin Login</span>
           <h1>Seversoft Ops</h1>
-          <p>Enter the private ops access key to manage blog content, drafts, publishing status, and workspace activity.</p>
+          <p>Sign in to manage production blog content, drafts, publishing status, and admin activity.</p>
 
-          <form onSubmit={handleLogin} className="ops-login-form">
-            <label htmlFor="ops-access-key">Access Key</label>
-            <input
-              id="ops-access-key"
-              type="password"
-              value={accessKey}
-              onChange={(event) => setAccessKey(event.target.value)}
-              placeholder="Enter access key"
-              autoComplete="current-password"
-            />
-            {loginError && <span className="ops-error">{loginError}</span>}
+          {!process.env.ADMIN_PASSWORD && (
+            <span className="ops-error">Set ADMIN_PASSWORD and ADMIN_SESSION_SECRET before production use.</span>
+          )}
+
+          <form action={loginAction} className="ops-login-form">
+            <label htmlFor="ops-password">Password</label>
+            <input id="ops-password" name="password" type="password" placeholder="Enter admin password" autoComplete="current-password" />
+            {error && <span className="ops-error">Invalid admin password.</span>}
             <button className="button button-primary" type="submit">
               Open Dashboard
             </button>
@@ -229,141 +152,64 @@ export default function OpsAdminPage() {
     );
   }
 
+  const [posts, auditLogs] = await Promise.all([getAdminPosts(), getAuditLogs()]);
+  const published = posts.filter((post) => post.status === "published").length;
+  const drafts = posts.filter((post) => post.status === "draft").length;
+  const review = posts.filter((post) => post.status === "review").length;
+
   return (
     <main className="ops-page">
       <header className="ops-header">
         <div>
           <span className="section-kicker kicker-with-dot">Admin Dashboard</span>
           <h1>Content operations</h1>
-          <p>Manage blog posts, review publishing status, and keep an eye on content activity.</p>
+          <p>Manage production blog posts, review publishing status, and monitor content activity.</p>
         </div>
         <div className="ops-header-actions">
           <Link href="/blog" className="button button-secondary">
             View Blog
           </Link>
-          <button type="button" className="button button-secondary" onClick={handleLogout}>
-            Logout
-          </button>
+          <form action={logoutAction}>
+            <button type="submit" className="button button-secondary">
+              Logout
+            </button>
+          </form>
         </div>
       </header>
 
+      {saved && <div className="ops-banner frame-card">Post {saved} successfully.</div>}
+      {!backendStatus.adminWritesConfigured && (
+        <div className="ops-banner ops-banner-warning frame-card">
+          Supabase admin writes are not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to enable persistent CRUD.
+        </div>
+      )}
+
       <section className="ops-stats">
-        {stats.map((item) => (
-          <article className="ops-stat-card frame-card" key={item.label}>
-            <span>{item.label}</span>
-            <strong>{item.value}</strong>
+        {[
+          ["Published", published],
+          ["Drafts", drafts],
+          ["In Review", review],
+          ["Total Posts", posts.length],
+        ].map(([label, value]) => (
+          <article className="ops-stat-card frame-card" key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
           </article>
         ))}
       </section>
 
       <section className="ops-grid">
-        <form className="ops-panel frame-card ops-editor" onSubmit={handleSubmit}>
+        <form className="ops-panel frame-card ops-editor" action={createPostAction}>
           <div className="ops-panel-heading">
             <div>
               <span>Blog Editor</span>
-              <h2>{form.id ? "Edit post" : "Create post"}</h2>
-            </div>
-            {form.id && (
-              <button type="button" className="ops-text-button" onClick={() => setForm(emptyForm)}>
-                New post
-              </button>
-            )}
-          </div>
-
-          <div className="ops-field">
-            <label htmlFor="post-title">Title</label>
-            <input
-              id="post-title"
-              value={form.title}
-              onChange={(event) =>
-                setForm((current) => ({
-                  ...current,
-                  title: event.target.value,
-                  slug: current.slug || slugify(event.target.value),
-                }))
-              }
-              placeholder="How to build reliable fintech systems"
-            />
-          </div>
-
-          <div className="ops-row">
-            <div className="ops-field">
-              <label htmlFor="post-slug">Slug</label>
-              <input
-                id="post-slug"
-                value={form.slug}
-                onChange={(event) => setForm((current) => ({ ...current, slug: slugify(event.target.value) }))}
-                placeholder="reliable-fintech-systems"
-              />
-            </div>
-            <div className="ops-field">
-              <label htmlFor="post-read-time">Read Time</label>
-              <input
-                id="post-read-time"
-                value={form.readTime}
-                onChange={(event) => setForm((current) => ({ ...current, readTime: event.target.value }))}
-              />
+              <h2>Create post</h2>
             </div>
           </div>
-
-          <div className="ops-row">
-            <div className="ops-field">
-              <label htmlFor="post-category">Category</label>
-              <select
-                id="post-category"
-                value={form.category}
-                onChange={(event) => setForm((current) => ({ ...current, category: event.target.value }))}
-              >
-                <option>Software Engineering</option>
-                <option>Fintech Infrastructure</option>
-                <option>AI Systems</option>
-                <option>Compliance</option>
-                <option>Product Strategy</option>
-              </select>
-            </div>
-            <div className="ops-field">
-              <label htmlFor="post-status">Status</label>
-              <select
-                id="post-status"
-                value={form.status}
-                onChange={(event) => setForm((current) => ({ ...current, status: event.target.value as ManagedPost["status"] }))}
-              >
-                <option>Draft</option>
-                <option>Review</option>
-                <option>Published</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="ops-field">
-            <label htmlFor="post-excerpt">Excerpt</label>
-            <textarea
-              id="post-excerpt"
-              value={form.excerpt}
-              onChange={(event) => setForm((current) => ({ ...current, excerpt: event.target.value }))}
-              placeholder="Short summary shown on the blog listing."
-            />
-          </div>
-
-          <div className="ops-field">
-            <label htmlFor="post-content">Content</label>
-            <textarea
-              id="post-content"
-              className="ops-content-input"
-              value={form.content}
-              onChange={(event) => setForm((current) => ({ ...current, content: event.target.value }))}
-              placeholder="Write the full article content here."
-            />
-          </div>
-
-          {notice && <span className="ops-notice">{notice}</span>}
-
+          <PostFields />
           <div className="ops-form-actions">
             <button className="button button-primary" type="submit">
-              {form.id ? "Save Changes" : "Publish to Workspace"}
-            </button>
-            <button type="button" className="button button-secondary" onClick={() => setForm(emptyForm)}>
-              Clear
+              Create Post
             </button>
           </div>
         </form>
@@ -372,21 +218,16 @@ export default function OpsAdminPage() {
           <section className="ops-panel frame-card">
             <div className="ops-panel-heading">
               <div>
-                <span>Admin Content</span>
-                <h2>Quick actions</h2>
+                <span>Backend</span>
+                <h2>Production status</h2>
               </div>
             </div>
-            <div className="ops-action-list">
-              <button type="button" onClick={() => setForm({ ...emptyForm, status: "Draft" })}>
-                Start draft
-              </button>
-              <button type="button" onClick={() => setForm({ ...emptyForm, category: "AI Systems", status: "Review" })}>
-                Queue AI article
-              </button>
-              <button type="button" onClick={resetWorkspace}>
-                Reset workspace posts
-              </button>
-            </div>
+            <ul className="ops-settings-list">
+              <li>Public reads: {backendStatus.publicReadsConfigured ? "Supabase" : "Local fallback"}</li>
+              <li>Admin writes: {backendStatus.adminWritesConfigured ? "Enabled" : "Missing service key"}</li>
+              <li>Auth: {process.env.ADMIN_PASSWORD ? "Password configured" : "Missing password"}</li>
+              <li>Static export: Disabled for server runtime</li>
+            </ul>
           </section>
 
           <section className="ops-panel frame-card">
@@ -397,29 +238,14 @@ export default function OpsAdminPage() {
               </div>
             </div>
             <div className="ops-activity-list">
-              {activity.map((item) => (
+              {auditLogs.map((item) => (
                 <div key={item.id} className="ops-activity-item">
                   <strong>{item.action}</strong>
                   <p>{item.detail}</p>
-                  <span>{item.at}</span>
+                  <span>{formatAuditDate(item.created_at)}</span>
                 </div>
               ))}
             </div>
-          </section>
-
-          <section className="ops-panel frame-card">
-            <div className="ops-panel-heading">
-              <div>
-                <span>Settings</span>
-                <h2>Workspace</h2>
-              </div>
-            </div>
-            <ul className="ops-settings-list">
-              <li>Static site mode</li>
-              <li>Browser-local content store</li>
-              <li>Hidden from public navigation</li>
-              <li>Manual deploy required for real publishing</li>
-            </ul>
           </section>
         </aside>
       </section>
@@ -436,24 +262,28 @@ export default function OpsAdminPage() {
         <div className="ops-post-list">
           {posts.map((post) => (
             <article className="ops-post-item" key={post.id}>
-              <div>
-                <span className={`ops-status ops-status-${post.status.toLowerCase()}`}>{post.status}</span>
-                <h3>{post.title}</h3>
-                <p>{post.excerpt}</p>
-                <div className="ops-post-meta">
-                  <span>{post.category}</span>
-                  <span>{post.readTime}</span>
-                  <span>Updated {post.updatedAt}</span>
-                </div>
-              </div>
-              <div className="ops-post-actions">
-                <button type="button" onClick={() => editPost(post)}>
-                  Edit
-                </button>
-                <button type="button" onClick={() => deletePost(post)}>
-                  Delete
-                </button>
-              </div>
+              <details>
+                <summary>
+                  <span className={`ops-status ops-status-${post.status}`}>{post.status}</span>
+                  <strong>{post.title}</strong>
+                  <span>{post.category} / {post.readTime}</span>
+                </summary>
+
+                <form className="ops-inline-editor" action={updatePostAction}>
+                  <PostFields post={post} />
+                  <div className="ops-form-actions">
+                    <button className="button button-primary" type="submit">
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+
+                <form action={deletePostAction} className="ops-delete-form">
+                  <input type="hidden" name="id" value={post.id} />
+                  <input type="hidden" name="title" value={post.title} />
+                  <button type="submit">Delete post</button>
+                </form>
+              </details>
             </article>
           ))}
         </div>
