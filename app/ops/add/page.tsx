@@ -44,7 +44,7 @@ function formatAuditDate(value: string) {
 }
 
 function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
-  const content = "content" in post && Array.isArray(post.content) ? contentToText(post.content) : post.content ?? "";
+  const content = typeof post.content === "string" ? post.content : (Array.isArray(post.content) ? contentToText(post.content as AdminPost["content"]) : "");
   const title = post.title ?? "";
 
   return (
