@@ -81,14 +81,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </div>
 
             <div className="blog-article-content" style={{ display: "grid", gap: "38px" }}>
-              {post.content.map((section) => (
-                <section key={section.heading}>
-                  <h2 className="blog-article-section-title" style={{ color: "var(--text-dark)", fontSize: "clamp(1.55rem, 3vw, 2.15rem)", marginBottom: "16px" }}>
-                    {section.heading}
-                  </h2>
+              {post.content.map((section, idx) => (
+                <section key={idx}>
+                  {section.heading && (
+                    <h2 className="blog-article-section-title" style={{ color: "var(--text-dark)", fontSize: "clamp(1.55rem, 3vw, 2.15rem)", marginBottom: "16px" }}>
+                      {section.heading}
+                    </h2>
+                  )}
                   <div className="blog-article-paragraphs" style={{ display: "grid", gap: "18px" }}>
-                    {section.paragraphs.map((paragraph) => (
-                      <p className="blog-article-paragraph" key={paragraph} style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.85" }}>
+                    {section.paragraphs
+                      .filter((paragraph) => paragraph !== "Add article details here.")
+                      .map((paragraph, pIdx) => (
+                      <p className="blog-article-paragraph" key={pIdx} style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.85" }}>
                         {paragraph}
                       </p>
                     ))}

@@ -1,4 +1,4 @@
-import { NextResponse } from "next/response";
+import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
 import { isAdminAuthed } from "@/app/ops/add/actions";
 
@@ -34,26 +34,16 @@ The JSON must have the following keys:
 - "title": A catchy technical title
 - "excerpt": A 2-3 sentence summary
 - "callout": A short one-sentence insightful quote or key takeaway
-- "content": The main body of the article formatted exactly as follows:
-Heading
-
-Paragraph 1
-
-Paragraph 2
-
----
-
-Next Heading
-
-Paragraph 1`,
+- "content": The main body of the article as plain text or simple markdown. This section MUST be extremely comprehensive and long-form. Write extensively (at least 800-1000 words) with deep insights, examples, and detailed explanations. Do not write a short summary.`,
         },
         {
           role: "user",
           content: `Write a blog post about: ${prompt}`,
         },
       ],
-      model: "llama3-8b-8192", // Using Llama 3 8B via Groq
+      model: "llama-3.3-70b-versatile", // Using a current supported Groq model
       temperature: 0.7,
+      response_format: { type: "json_object" },
     });
 
     const output = completion.choices[0]?.message?.content;
@@ -65,7 +55,13 @@ Paragraph 1`,
     // Try to safely parse the JSON output
     let parsed;
     try {
-      parsed = JSON.parse(output.trim().replace(/^```json/, "").replace(/```$/, ""));
+      let cleaned = output.trim();
+      if (cleaned.startsWith("```")) {
+        cleaned = cleaned.replace(/^```(json)?\s*/i, "").replace(/```$/i, "").trim();
+      }
+      // In case the model still outputs literal newlines in strings, escape them before parsing.
+      // But json_object format should guarantee valid JSON.
+      parsed = JSON.parse(cleaned);
     } catch (e) {
       console.error("Failed to parse Groq output:", output);
       return NextResponse.json({ error: "AI returned malformed JSON." }, { status: 500 });

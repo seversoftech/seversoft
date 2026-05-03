@@ -9,6 +9,7 @@ const footerLinks = {
     { label: "Services", href: "/services" },
     { label: "Ecosystem", href: "/ecosystem" },
     { label: "Build With Us", href: "/build-with-us" },
+    { label: "Blog", href: "/blog" },
   ],
   resources: [
     { label: "Documentation", href: "/documentation" },

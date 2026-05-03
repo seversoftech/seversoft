@@ -110,6 +110,16 @@ function formatDate(value: string | null) {
 }
 
 function rowToBlogPost(row: SupabasePostRow): BlogPost {
+  const normalizedContent = row.content.map((section) => {
+    if (section.heading && section.heading.length > 100) {
+      return {
+        heading: "",
+        paragraphs: [section.heading, ...section.paragraphs],
+      };
+    }
+    return section;
+  });
+
   return {
     slug: row.slug,
     category: row.category,
@@ -119,7 +129,7 @@ function rowToBlogPost(row: SupabasePostRow): BlogPost {
     readTime: row.read_time,
     featured: row.featured,
     callout: row.callout,
-    content: row.content,
+    content: normalizedContent,
   };
 }
 
@@ -166,28 +176,24 @@ export function slugify(value: string) {
 }
 
 export function contentToText(content: BlogPost["content"]) {
-  return content.map((section) => [section.heading, ...section.paragraphs].join("\n\n")).join("\n\n---\n\n");
+  return content.map((section) => {
+    const parts = [];
+    if (section.heading) parts.push(section.heading);
+    parts.push(...section.paragraphs);
+    return parts.join("\n\n");
+  }).join("\n\n");
 }
 
 export function textToContent(value: string): BlogPost["content"] {
-  const blocks = value
-    .split(/\n\s*---\s*\n/g)
-    .map((block) => block.trim())
-    .filter(Boolean);
+  const parts = value
+    .split(/\n+/)
+    .map((part) => part.trim())
+    .filter((part) => part && part !== "---");
 
-  const sections = blocks.map((block) => {
-    const parts = block
-      .split(/\n{2,}/g)
-      .map((part) => part.trim())
-      .filter(Boolean);
-
-    return {
-      heading: parts[0] || "Overview",
-      paragraphs: parts.slice(1).length ? parts.slice(1) : ["Add article details here."],
-    };
-  });
-
-  return sections.length ? sections : [{ heading: "Overview", paragraphs: ["Add article details here."] }];
+  return [{
+    heading: "",
+    paragraphs: parts.length ? parts : []
+  }];
 }
 
 export async function getPublishedPosts() {

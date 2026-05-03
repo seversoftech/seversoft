@@ -58,7 +58,7 @@ export function AIGenerator({ id }: { id: string }) {
       <div style={{ marginBottom: "1rem" }}>
         <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>✨ AI Content Generator</h3>
         <p style={{ margin: "0.25rem 0 0", fontSize: "0.875rem", opacity: 0.7 }}>
-          Enter a topic and let Groq AI draft the blog post for you.
+          Enter a topic and let AI draft the blog post for you.
         </p>
       </div>
 
