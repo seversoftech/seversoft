@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPublishedPosts } from "@/lib/blog";
 
-const topics = ["Fintech", "AI Automation", "Product Strategy", "Compliance", "APIs", "Cloud Infrastructure"];
+const topics = ["Software Engineering", "Fintech Infrastructure", "AI Systems", "Compliance", "Product Strategy", "APIs", "Cloud Infrastructure", "General"];
 
 export const revalidate = 60;
 
@@ -105,16 +105,13 @@ export default async function BlogPage() {
                   borderColor: "rgba(15,20,26,0.08)",
                 }}
               >
-                <span className="store-tag">{post.category}</span>
-                <Link href={`/blog/${post.slug}`}>
-                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "1.35rem", marginTop: "18px" }}>{post.title}</h3>
+                <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)" }}>{post.category}</span>
+                <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
+                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "1.35rem", marginTop: "18px", marginBottom: "12px" }}>{post.title}</h3>
                 </Link>
-                <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.75", fontSize: "0.95rem", marginBottom: "24px" }}>{post.excerpt}</p>
-                <div className="blog-meta-row" style={{ display: "flex", gap: "10px", flexWrap: "wrap", color: "#64748b", fontSize: "0.84rem", fontWeight: 700 }}>
-                  <span>{post.date}</span>
-                  <span>/</span>
-                  <span>{post.readTime}</span>
-                </div>
+                {post.callout && (
+                  <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.75", fontSize: "0.95rem", margin: 0 }}>{post.callout}</p>
+                )}
               </article>
             ))}
           </div>

@@ -43,8 +43,14 @@ export function AIGenerator({ id }: { id: string }) {
       const calloutEl = document.getElementById(`callout-${id}`) as HTMLInputElement;
       if (calloutEl && data.callout) calloutEl.value = data.callout;
 
+      const categoryEl = document.getElementById(`category-${id}`) as HTMLSelectElement;
+      if (categoryEl && data.category) categoryEl.value = data.category;
+
       const contentEl = document.getElementById(`content-${id}`) as HTMLTextAreaElement;
       if (contentEl && data.content) contentEl.value = data.content;
+
+      const readTimeEl = document.getElementById(`readTime-${id}`) as HTMLInputElement;
+      if (readTimeEl && data.readTime) readTimeEl.value = data.readTime;
 
     } catch (err: any) {
       setError(err.message);

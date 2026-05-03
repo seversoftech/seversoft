@@ -76,6 +76,9 @@ function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
             <option>AI Systems</option>
             <option>Compliance</option>
             <option>Product Strategy</option>
+            <option>APIs</option>
+            <option>Cloud Infrastructure</option>
+            <option>General</option>
           </select>
         </div>
         <div className="ops-field">
