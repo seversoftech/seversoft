@@ -61,18 +61,24 @@ const reviews = [
 const partners = [
   { name: "AWS", color: "#ff9900", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg" },
   { name: "Cloudinary", color: "#3448c5", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudinary.svg" },
+  { name: "Docker", color: "#2496ed", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg" },
   { name: "Firebase", color: "#ffca28", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/firebase.svg" },
   { name: "Flutterwave", color: "#fb9129", logo: "https://www.google.com/s2/favicons?sz=128&domain=flutterwave.com" },
+  { name: "GitHub", color: "#181717", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" },
   { name: "Google Cloud", color: "#4285f4", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/googlecloud.svg" },
   { name: "MongoDB", color: "#47a248", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mongodb.svg" },
   { name: "Monnify", color: "#003399", logo: "https://www.google.com/s2/favicons?sz=128&domain=monnify.com" },
   { name: "OneSignal", color: "#eb4b26", logo: "https://www.google.com/s2/favicons?sz=128&domain=onesignal.com" },
   { name: "OpenAI", color: "#10a37f", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" },
   { name: "Paystack", color: "#00a3d9", logo: "https://www.google.com/s2/favicons?sz=128&domain=paystack.com" },
+  { name: "Plaid", color: "#000000", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/plaid.svg" },
+  { name: "PostgreSQL", color: "#336791", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg" },
   { name: "Redis", color: "#d82c20", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/redis.svg" },
+  { name: "Sentry", color: "#362d59", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sentry.svg" },
   { name: "Stripe", color: "#635bff", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/stripe.svg" },
   { name: "Supabase", color: "#3ecf8e", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/supabase.svg" },
   { name: "Twilio", color: "#f22f46", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twilio.svg" },
+  { name: "Vercel", color: "#000000", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg" },
 ];
 
 const codeSnippets = [
@@ -215,8 +221,8 @@ export default function Home() {
       <section className="section section-dark" style={{ paddingTop: "20px", paddingBottom: "72px" }}>
         <div className="shell">
           <div style={{ textAlign: "center", marginBottom: "42px" }}>
-            <span style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", opacity: 0.7 }}>
-              Powering integrations with leading platforms
+            <span style={{ fontSize: "0.70rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)", opacity: 0.7 }}>
+              Powering integrations with leading platforms and tools.
             </span>
           </div>
           <div className="logo-cloud">

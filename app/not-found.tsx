@@ -25,8 +25,11 @@ export default function NotFound() {
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
               </Link>
-              <Link href="/ecosystem" className="button button-secondary" style={{ padding: "0 16px", fontSize: "0.9rem", flex: 1, maxWidth: "200px", whiteSpace: "nowrap" }}>
-                Ecosystem
+              <Link href="/blog" className="button button-secondary" style={{ padding: "0 16px", fontSize: "0.9rem", flex: 1, maxWidth: "200px", whiteSpace: "nowrap" }}>
+                Explore Blog
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px" }}>
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
               </Link>
             </div>
           </div>
