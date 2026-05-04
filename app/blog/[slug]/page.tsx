@@ -92,10 +92,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     {section.paragraphs
                       .filter((paragraph) => paragraph !== "Add article details here.")
                       .map((paragraph, pIdx) => (
-                      <p className="blog-article-paragraph" key={pIdx} style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.85" }}>
-                        {paragraph}
-                      </p>
-                    ))}
+                        <p className="blog-article-paragraph" key={pIdx} style={{ color: "#475569", fontSize: "1rem", lineHeight: "1.85" }}>
+                          {paragraph}
+                        </p>
+                      ))}
                   </div>
                 </section>
               ))}
@@ -104,11 +104,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="section section-light" style={{ paddingTop: "0" }}>
+      <section className="section section-light" style={{ paddingTop: "20px" }}>
         <div className="shell blog-article-shell" style={{ maxWidth: "880px" }}>
           <div className="section-heading compact">
             <span className="section-kicker kicker-with-dot">Keep Reading</span>
-            <h2 style={{ color: "var(--text-dark)" }}>More from the blog</h2>
+            <h3 style={{ color: "var(--text-dark)" }}>More Articles</h3>
           </div>
           <div className="blog-related-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px" }}>
             {relatedPosts.map((related) => (
@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   borderColor: "rgba(15,20,26,0.08)",
                 }}
               >
-                <span className="store-tag">{related.category}</span>
+                <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)" }}>{related.category}</span>
                 <strong style={{ display: "block", marginTop: "16px", fontSize: "1.05rem", lineHeight: "1.35" }}>{related.title}</strong>
               </Link>
             ))}

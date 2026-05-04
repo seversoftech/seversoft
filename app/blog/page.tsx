@@ -43,7 +43,7 @@ export default async function BlogPage() {
             }}
           >
             <div className="blog-featured-copy">
-              <span className="store-tag">{featuredPost.category}</span>
+              <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)" }}>{featuredPost.category}</span>
               <Link href={`/blog/${featuredPost.slug}`}>
                 <h2 className="blog-featured-title" style={{ color: "var(--text-dark)", fontSize: "clamp(2rem, 4vw, 3.1rem)", marginTop: "18px" }}>
                   {featuredPost.title}
@@ -93,24 +93,24 @@ export default async function BlogPage() {
             </p>
           </div>
 
-          <div className="blog-post-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "22px" }}>
+          <div className="blog-post-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px" }}>
             {posts.map((post) => (
               <article
                 key={post.title}
                 className="frame-card blog-card"
                 style={{
-                  padding: "28px",
+                  padding: "18px",
                   background: "#fff",
                   color: "var(--text-dark)",
                   borderColor: "rgba(15,20,26,0.08)",
                 }}
               >
-                <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)" }}>{post.category}</span>
+                <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)", fontSize: "0.65rem", padding: "2px 8px" }}>{post.category}</span>
                 <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "1.35rem", marginTop: "18px", marginBottom: "12px" }}>{post.title}</h3>
+                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "0.95rem", marginTop: "10px", marginBottom: "4px", lineHeight: "1.3" }}>{post.title}</h3>
                 </Link>
                 {post.callout && (
-                  <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.75", fontSize: "0.95rem", margin: 0 }}>{post.callout}</p>
+                  <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.4", fontSize: "0.75rem", margin: 0 }}>{post.callout}</p>
                 )}
               </article>
             ))}

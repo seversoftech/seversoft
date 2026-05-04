@@ -71,7 +71,7 @@ const partners = [
   { name: "OneSignal", color: "#eb4b26", logo: "https://www.google.com/s2/favicons?sz=128&domain=onesignal.com" },
   { name: "OpenAI", color: "#10a37f", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" },
   { name: "Paystack", color: "#00a3d9", logo: "https://www.google.com/s2/favicons?sz=128&domain=paystack.com" },
-  { name: "Plaid", color: "#000000", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/plaid.svg" },
+  { name: "Plaid", color: "#000000", logo: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Plaid_logo.svg" },
   { name: "PostgreSQL", color: "#336791", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg" },
   { name: "Redis", color: "#d82c20", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/redis.svg" },
   { name: "Sentry", color: "#362d59", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sentry.svg" },
