@@ -78,6 +78,7 @@ function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
             <option>Product Strategy</option>
             <option>APIs</option>
             <option>Cloud Infrastructure</option>
+            <option>Finance</option>
             <option>General</option>
           </select>
         </div>
@@ -124,9 +125,9 @@ function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
 export default async function OpsAdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; saved?: string }>;
+  searchParams: Promise<{ error?: string; saved?: string; filter?: string }>;
 }) {
-  const [{ error, saved }, isAuthed] = await Promise.all([searchParams, isAdminAuthed()]);
+  const [{ error, saved, filter }, isAuthed] = await Promise.all([searchParams, isAdminAuthed()]);
   const backendStatus = getBlogBackendStatus();
 
   if (!isAuthed) {
@@ -163,6 +164,16 @@ export default async function OpsAdminPage({
   const drafts = posts.filter((post) => post.status === "draft").length;
   const review = posts.filter((post) => post.status === "review").length;
 
+  const activeFilter = filter === "published" || filter === "draft" || filter === "review" ? filter : "all";
+  const filteredPosts = activeFilter === "all" ? posts : posts.filter((p) => p.status === activeFilter);
+
+  const statCards: [string, number, string][] = [
+    ["Published", published, "published"],
+    ["Drafts", drafts, "draft"],
+    ["In Review", review, "review"],
+    ["Total Posts", posts.length, "all"],
+  ];
+
   return (
     <main className="ops-page">
       <header className="ops-header">
@@ -191,16 +202,28 @@ export default async function OpsAdminPage({
       )}
 
       <section className="ops-stats">
-        {[
-          ["Published", published],
-          ["Drafts", drafts],
-          ["In Review", review],
-          ["Total Posts", posts.length],
-        ].map(([label, value]) => (
-          <article className="ops-stat-card frame-card" key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </article>
+        {statCards.map(([label, value, filterKey]) => (
+          <Link
+            href={filterKey === "all" ? "/ops/add#workspace" : `/ops/add?filter=${filterKey}#workspace`}
+            key={label}
+            style={{ textDecoration: "none" }}
+          >
+            <article
+              className="ops-stat-card frame-card"
+              style={{
+                cursor: "pointer",
+                outline: activeFilter === filterKey ? "2px solid var(--primary)" : "none",
+                outlineOffset: "2px",
+                transition: "outline 0.15s",
+              }}
+            >
+              <span>{label}</span>
+              <strong>{value}</strong>
+              {activeFilter === filterKey && filterKey !== "all" && (
+                <span style={{ fontSize: "0.7rem", color: "var(--primary)", fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase" }}>Active</span>
+              )}
+            </article>
+          </Link>
         ))}
       </section>
 
@@ -281,17 +304,30 @@ export default async function OpsAdminPage({
         </aside>
       </section>
 
-      <section className="ops-panel frame-card">
+      <section className="ops-panel frame-card" id="workspace">
         <div className="ops-panel-heading">
           <div>
             <span>Posts</span>
-            <h2>Blog workspace</h2>
+            <h2>
+              Blog workspace
+              {activeFilter !== "all" && (
+                <span style={{ marginLeft: "0.5rem", fontSize: "0.8rem", fontWeight: 500, color: "var(--primary)" }}>— {activeFilter}</span>
+              )}
+            </h2>
           </div>
-          <span className="ops-muted">{posts.length} items</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <span className="ops-muted">{filteredPosts.length} of {posts.length} items</span>
+            {activeFilter !== "all" && (
+              <Link href="/ops/add#workspace" className="button button-secondary" style={{ padding: "0.2rem 0.7rem", fontSize: "0.8rem" }}>Clear filter</Link>
+            )}
+          </div>
         </div>
 
         <div className="ops-post-list">
-          {posts.map((post) => (
+          {filteredPosts.length === 0 && (
+            <p style={{ padding: "2rem", color: "var(--muted)", textAlign: "center" }}>No posts with status &ldquo;{activeFilter}&rdquo;.</p>
+          )}
+          {filteredPosts.map((post) => (
             <article className="ops-post-item" key={post.id}>
               <details>
                 <summary>
