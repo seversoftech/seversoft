@@ -16,7 +16,7 @@ export default async function BlogPage() {
     <main id="top">
       <Navbar />
 
-      <section className="section section-dark ecosystem-hero blog-hero" style={{ paddingTop: "90px", paddingBottom: "90px" }}>
+      <section className="section section-dark ecosystem-hero blog-hero" style={{ paddingTop: "30px", paddingBottom: "90px" }}>
         <div className="shell blog-hero-shell" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
           <span className="section-kicker kicker-with-dot">Seversoft Blog</span>
           <h1 style={{ marginTop: "20px", marginBottom: "20px" }}>
