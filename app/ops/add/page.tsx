@@ -239,6 +239,31 @@ export default async function OpsAdminPage({
           <section className="ops-panel frame-card">
             <div className="ops-panel-heading">
               <div>
+                <span>Team</span>
+                <h2>Admin management</h2>
+              </div>
+            </div>
+            <div className="ops-activity-list">
+              <div className="ops-activity-item" style={{ borderLeftColor: "var(--primary)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <div>
+                    <strong>System Administrator</strong>
+                    <p style={{ marginTop: "0.25rem", color: "var(--muted)" }}>Configured via environment</p>
+                  </div>
+                  <span className="ops-status ops-status-published">Active</span>
+                </div>
+              </div>
+            </div>
+            <div className="ops-form-actions" style={{ marginTop: "1rem" }}>
+              <button className="button button-secondary" disabled title="Supabase Auth required for multi-admin support" style={{ width: "100%", opacity: 0.5, cursor: "not-allowed" }}>
+                + Invite new admin
+              </button>
+            </div>
+          </section>
+
+          <section className="ops-panel frame-card">
+            <div className="ops-panel-heading">
+              <div>
                 <span>Activity</span>
                 <h2>Audit log</h2>
               </div>
