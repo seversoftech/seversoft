@@ -3,10 +3,32 @@
 import { useState } from "react";
 import { slugify } from "@/lib/blog";
 
+const RANDOM_TOPICS = [
+  "How artificial intelligence is reshaping digital banking",
+  "The evolution of payment gateways in e-commerce",
+  "Building robust microservices for financial platforms",
+  "Understanding PCI DSS compliance in modern web apps",
+  "The role of blockchain in cross-border transactions",
+  "Strategies for scaling high-throughput APIs",
+  "Machine learning for real-time fraud detection",
+  "Designing accessible and secure fintech user interfaces",
+  "A guide to webhook security in payment processing",
+  "Exploring the benefits of serverless architecture for startups",
+  "Implementing zero-trust security in financial applications",
+  "The impact of open banking on traditional financial institutions",
+  "Best practices for database migrations with zero downtime",
+  "Using WebSockets for real-time financial market data",
+];
+
 export function AIGenerator({ id }: { id: string }) {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleRandomTopic = () => {
+    const random = RANDOM_TOPICS[Math.floor(Math.random() * RANDOM_TOPICS.length)];
+    setPrompt(random);
+  };
 
   const handleGenerate = async () => {
     if (!prompt.trim()) {
@@ -77,6 +99,16 @@ export function AIGenerator({ id }: { id: string }) {
           style={{ flex: 1 }}
           disabled={loading}
         />
+        <button
+          type="button"
+          onClick={handleRandomTopic}
+          className="button button-secondary"
+          disabled={loading}
+          title="Pick a random topic"
+          style={{ padding: "0 1rem" }}
+        >
+          🎲
+        </button>
         <button
           type="button"
           onClick={handleGenerate}
