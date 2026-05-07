@@ -90,16 +90,16 @@ export function AIGenerator({ id }: { id: string }) {
         </p>
       </div>
 
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <div className="ops-ai-bar">
         <input
           type="text"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="e.g. The future of scalable payment ledgers..."
-          style={{ flex: 1 }}
           disabled={loading}
         />
-        <button
+        <div className="ops-ai-actions">
+          <button
           type="button"
           onClick={handleRandomTopic}
           className="button button-secondary"
@@ -114,9 +114,10 @@ export function AIGenerator({ id }: { id: string }) {
           onClick={handleGenerate}
           className="button button-primary"
           disabled={loading}
-        >
-          {loading ? "Generating..." : "Generate Draft"}
-        </button>
+          >
+            {loading ? "Generating..." : "Generate Draft"}
+          </button>
+        </div>
       </div>
 
       {error && <div style={{ color: "#ef4444", fontSize: "0.875rem", marginTop: "0.5rem" }}>{error}</div>}

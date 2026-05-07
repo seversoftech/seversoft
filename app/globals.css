@@ -3117,7 +3117,8 @@ p {
 .ops-login-form input,
 .ops-field input,
 .ops-field select,
-.ops-field textarea {
+.ops-field textarea,
+.ops-ai-bar input {
   width: 100%;
   border: 1px solid var(--line-strong);
   border-radius: 12px;
@@ -3132,7 +3133,8 @@ p {
 .ops-login-form input:focus,
 .ops-field input:focus,
 .ops-field select:focus,
-.ops-field textarea:focus {
+.ops-field textarea:focus,
+.ops-ai-bar input:focus {
   border-color: var(--blue-strong);
   box-shadow: 0 0 0 4px rgba(94, 174, 254, 0.12);
 }
@@ -3415,6 +3417,26 @@ p {
   margin-top: 22px;
   padding-top: 22px;
   border-top: 1px solid var(--line);
+}
+
+.ops-ai-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ops-ai-bar input {
+  flex: 1 1 240px;
+}
+
+.ops-ai-actions {
+  display: flex;
+  gap: 10px;
+  flex: 1 1 auto;
+}
+
+.ops-ai-actions button:last-child {
+  flex: 1;
 }
 
 .ops-delete-form {
