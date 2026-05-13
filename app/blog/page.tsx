@@ -7,12 +7,19 @@ const topics = ["Software Engineering", "Fintech Infrastructure", "AI Systems", 
 
 export const revalidate = 60;
 
-export default async function BlogPage() {
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page: pageParam } = await searchParams;
+  const currentPage = parseInt(pageParam || "1", 10);
+  const postsPerPage = 10;
+
   const blogPosts = await getPublishedPosts();
   const featuredPost = blogPosts.find((post) => post.featured) ?? blogPosts[0];
-  const posts = blogPosts
+  const allPosts = blogPosts
     .filter((post) => post.slug !== featuredPost.slug)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const totalPages = Math.ceil(allPosts.length / postsPerPage);
+  const posts = allPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
 
   return (
     <main id="top">
@@ -89,7 +96,7 @@ export default async function BlogPage() {
         <div className="shell">
           <div className="section-heading reveal">
             <span className="section-kicker kicker-with-dot">Latest Articles</span>
-            <h2 style={{ color: "var(--text-dark)" }}>Fresh thinking for modern teams</h2>
+            <h2 style={{ color: "var(--text-dark)", fontSize: "clamp(1rem, 2vw, 1.7rem)" }}>Fresh thinking for modern teams</h2>
             <p style={{ color: "rgba(15,20,26,0.68)" }}>
               Short reads for founders, operators, and product teams planning stronger digital infrastructure.
             </p>
@@ -165,6 +172,43 @@ export default async function BlogPage() {
               </article>
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <div
+              className="pagination"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "8px",
+                marginTop: "48px",
+                paddingBottom: "20px",
+              }}
+            >
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <Link
+                  key={pageNum}
+                  href={`/blog?page=${pageNum}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "8px",
+                    border: "1px solid",
+                    borderColor: pageNum === currentPage ? "#0f766e" : "rgba(15,20,26,0.12)",
+                    background: pageNum === currentPage ? "#0f766e" : "transparent",
+                    color: pageNum === currentPage ? "#fff" : "var(--text-dark)",
+                    fontWeight: 600,
+                    fontSize: "0.9rem",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  {pageNum}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
