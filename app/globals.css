@@ -285,6 +285,10 @@ p {
   backdrop-filter: blur(18px);
 }
 
+.blog-topic-panel {
+  box-shadow: none !important;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -2933,6 +2937,7 @@ p {
 .blog-card,
 .blog-related-card {
   min-width: 0;
+  box-shadow: none !important;
 }
 
 .blog-meta-row {

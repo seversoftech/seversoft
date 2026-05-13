@@ -10,7 +10,9 @@ export const revalidate = 60;
 export default async function BlogPage() {
   const blogPosts = await getPublishedPosts();
   const featuredPost = blogPosts.find((post) => post.featured) ?? blogPosts[0];
-  const posts = blogPosts.filter((post) => post.slug !== featuredPost.slug);
+  const posts = blogPosts
+    .filter((post) => post.slug !== featuredPost.slug)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <main id="top">
@@ -93,25 +95,73 @@ export default async function BlogPage() {
             </p>
           </div>
 
-          <div className="blog-post-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "18px" }}>
+          <div className="blog-post-list" style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
             {posts.map((post) => (
               <article
                 key={post.title}
-                className="frame-card blog-card"
+                className="blog-list-item"
                 style={{
-                  padding: "18px",
-                  background: "#fff",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "20px",
+                  padding: "20px 0",
+                  borderBottom: "1px solid rgba(15,20,26,0.08)",
                   color: "var(--text-dark)",
-                  borderColor: "rgba(15,20,26,0.08)",
                 }}
               >
-                <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)", fontSize: "0.65rem", padding: "2px 8px" }}>{post.category}</span>
-                <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none" }}>
-                  <h3 className="blog-card-title" style={{ color: "var(--text-dark)", fontSize: "0.95rem", marginTop: "10px", marginBottom: "4px", lineHeight: "1.3" }}>{post.title}</h3>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <span
+                    className="store-tag"
+                    style={{
+                      display: "inline-block",
+                      marginBottom: "8px",
+                      color: "var(--text-dark)",
+                      borderColor: "rgba(15,20,26,0.15)",
+                      background: "rgba(15,20,26,0.04)",
+                      fontSize: "0.62rem",
+                      padding: "3px 9px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {post.category}
+                  </span>
+                  <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+                    <h3
+                      className="blog-card-title"
+                      style={{
+                        color: "var(--text-dark)",
+                        fontSize: "1rem",
+                        margin: "0 0 6px",
+                        lineHeight: "1.35",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {post.title}
+                    </h3>
+                  </Link>
+                  {post.callout && (
+                    <p
+                      className="blog-card-excerpt"
+                      style={{ color: "#64748b", lineHeight: "1.6", fontSize: "0.87rem", margin: 0 }}
+                    >
+                      {post.callout}
+                    </p>
+                  )}
+                </div>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  style={{
+                    flexShrink: 0,
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: "#0f766e",
+                    textDecoration: "none",
+                    marginTop: "2px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Read →
                 </Link>
-                {post.callout && (
-                  <p className="blog-card-excerpt" style={{ color: "#475569", lineHeight: "1.4", fontSize: "0.75rem", margin: 0 }}>{post.callout}</p>
-                )}
               </article>
             ))}
           </div>
