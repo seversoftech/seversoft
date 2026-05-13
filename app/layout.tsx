@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Seversoft Technologies | Build Smart. Scale Fast.",
     description: "Premium fintech and software solutions for modern businesses.",
-    url: "https://seversoft.tech", // Update this with your actual domain
+    url: "https://seversoftech.com", // Update this with your actual domain
     siteName: "Seversoft Technologies",
     locale: "en_US",
     type: "website",
@@ -50,8 +50,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Seversoft Technologies",
-    "url": "https://seversoft.tech",
-    "logo": "https://seversoft.tech/media/seversoft_logo.png",
+    "url": "https://seversoftech.com",
+    "logo": "https://seversoftech.com/media/seversoft_logo.png",
     "description": "Premium fintech and software solutions company in Africa specializing in AI systems and scalable infrastructure.",
     "address": {
       "@type": "PostalAddress",
