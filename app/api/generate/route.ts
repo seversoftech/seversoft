@@ -72,8 +72,9 @@ The JSON must have the following keys:
     return NextResponse.json(parsed);
   } catch (error: unknown) {
     console.error("Groq generation error:", error);
+    const message = error instanceof Error ? error.message : "Failed to generate content";
     return NextResponse.json(
-      { error: error.message || "Failed to generate content" },
+      { error: message },
       { status: 500 }
     );
   }
