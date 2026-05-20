@@ -40,7 +40,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
       <section className="section section-light" style={{ paddingTop: "76px" }}>
         <div className="shell">
           <article
-            className="frame-card blog-featured-card"
+            className="blog-featured-card"
             style={{
               display: "grid",
               gridTemplateColumns: "minmax(0, 1.25fr) minmax(260px, 0.75fr)",
@@ -48,7 +48,9 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
               padding: "34px",
               background: "#fff",
               color: "var(--text-dark)",
-              borderColor: "rgba(15,20,26,0.08)",
+              border: "1px solid rgba(15,20,26,0.08)",
+              borderRadius: "10px",
+              boxShadow: "var(--shadow)",
             }}
           >
             <div className="blog-featured-copy">

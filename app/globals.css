@@ -289,6 +289,8 @@ p {
   box-shadow: none !important;
 }
 
+
+
 .blog-article-card {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -1756,6 +1758,7 @@ p {
   gap: 0;
   min-height: 420px;
   overflow: hidden;
+  border-radius: 10px;
   background: #12161b;
   border-color: rgba(255, 255, 255, 0.08);
 }

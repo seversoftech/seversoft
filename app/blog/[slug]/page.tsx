@@ -127,6 +127,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   background: "#fff",
                   color: "var(--text-dark)",
                   borderColor: "rgba(15,20,26,0.08)",
+                  borderRadius: "10px",
                 }}
               >
                 <span className="store-tag" style={{ color: "var(--text-dark)", borderColor: "rgba(15,20,26,0.15)", background: "rgba(15,20,26,0.04)" }}>{related.category}</span>

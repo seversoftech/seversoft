@@ -70,7 +70,7 @@ function getApiKey(admin = false) {
 }
 
 function endpoint(path: string) {
-  if (!supabaseUrl) throw new Error("SUPABASE_URL is not configured.");
+  if (!supabaseUrl) throw new Error("SUPABASE_URL is not configured...");
   return `${supabaseUrl.replace(/\/$/, "")}/rest/v1/${path}`;
 }
 
@@ -93,10 +93,10 @@ async function supabaseFetch<T>(path: string, init: RequestInit = {}, { admin = 
   }
 
   if (response.status === 204) return null as T;
-  
+
   const text = await response.text();
   if (!text) return null as T;
-  
+
   return JSON.parse(text) as T;
 }
 
