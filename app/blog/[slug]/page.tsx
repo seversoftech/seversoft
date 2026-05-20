@@ -66,6 +66,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               background: "#fff",
               color: "var(--text-dark)",
               borderColor: "rgba(15,20,26,0.08)",
+              backdropFilter: "none",
+              WebkitBackdropFilter: "none",
             }}
           >
             <div

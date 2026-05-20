@@ -34,9 +34,6 @@ export const metadata: Metadata = {
     title: "Seversoft Technologies | Fintech & AI Solutions",
     description: "Engineering high-performance digital systems for ambitious businesses.",
   },
-  icons: {
-    icon: "/media/seversoft_logo.png",
-  },
 };
 
 import { Analytics } from "@vercel/analytics/next"
