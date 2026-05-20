@@ -64,13 +64,13 @@ The JSON must have the following keys:
       // In case the model still outputs literal newlines in strings, escape them before parsing.
       // But json_object format should guarantee valid JSON.
       parsed = JSON.parse(cleaned);
-    } catch (e) {
+    } catch (_e) {
       console.error("Failed to parse Groq output:", output);
       return NextResponse.json({ error: "AI returned malformed JSON." }, { status: 500 });
     }
 
     return NextResponse.json(parsed);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Groq generation error:", error);
     return NextResponse.json(
       { error: error.message || "Failed to generate content" },

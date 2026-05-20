@@ -1,19 +1,14 @@
 import Link from "next/link";
 import {
-  contentToText,
   getAdminPosts,
   getAuditLogs,
   getBlogBackendStatus,
-  slugify,
-  type AdminPost,
 } from "@/lib/blog";
 import {
   createPostAction,
-  deletePostAction,
   isAdminAuthed,
   loginAction,
   logoutAction,
-  updatePostAction,
 } from "./actions";
 import { PasswordInput } from "./PasswordInput";
 import { AIGenerator } from "./AIGenerator";

@@ -74,8 +74,9 @@ export function AIGenerator({ id }: { id: string }) {
       const readTimeEl = document.getElementById(`readTime-${id}`) as HTMLInputElement;
       if (readTimeEl && data.readTime) readTimeEl.value = data.readTime;
 
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to generate content";
+      setError(message);
     } finally {
       setLoading(false);
     }

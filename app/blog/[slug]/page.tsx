@@ -60,12 +60,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="section section-light" style={{ paddingTop: "70px" }}>
         <div className="shell blog-article-shell" style={{ maxWidth: "880px" }}>
           <article
-            className="frame-card blog-article-card"
+            className="blog-article-card"
             style={{
               padding: "clamp(28px, 5vw, 52px)",
               background: "#fff",
               color: "var(--text-dark)",
               borderColor: "rgba(15,20,26,0.08)",
+              borderRadius: "10px",
               backdropFilter: "none",
               WebkitBackdropFilter: "none",
             }}
