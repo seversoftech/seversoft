@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPublishedPosts } from "@/lib/blog";
 
-const topics = ["Software Engineering", "Fintech Infrastructure", "AI Systems", "Compliance", "Product Strategy", "APIs", "Cloud Infrastructure", "Finance", "General"];
+const topics = ["Software Engineering", "Fintech Infrastructure", "AI Systems", "Cybersecurity", "Compliance", "Product Strategy", "APIs", "Cloud Infrastructure", "Finance", "General"];
 
 export const revalidate = 60;
 

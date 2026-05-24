@@ -34,7 +34,7 @@ The JSON must have the following keys:
 - "title": A catchy technical title
 - "excerpt": A 2-3 sentence summary
 - "callout": A short one-sentence insightful quote or key takeaway
-- "category": The most relevant category. MUST be exactly one of: "Software Engineering", "Fintech Infrastructure", "AI Systems", "Compliance", "Product Strategy", "APIs", "Cloud Infrastructure", "General".
+- "category": The most relevant category. MUST be exactly one of: "Software Engineering", "Fintech Infrastructure", "AI Systems", "Cybersecurity", "Compliance", "Product Strategy", "APIs", "Cloud Infrastructure", "General".
 - "readTime": Estimated read time (e.g., "5 min read") based on the length of the generated content.
 - "content": The main body of the article as plain text or simple markdown. This section MUST be extremely comprehensive and long-form. Write extensively (at least 800-1000 words) with deep insights, examples, and detailed explanations. Do not write a short summary.`,
         },

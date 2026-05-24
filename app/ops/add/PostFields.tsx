@@ -48,6 +48,7 @@ export function PostFields({ post = emptyDraft }: { post?: PostFieldsInput }) {
             <option>Software Engineering</option>
             <option>Fintech Infrastructure</option>
             <option>AI Systems</option>
+            <option>Cybersecurity</option>
             <option>Compliance</option>
             <option>Product Strategy</option>
             <option>APIs</option>
