@@ -4,20 +4,75 @@ import { useState } from "react";
 import { slugify } from "@/lib/blog";
 
 const RANDOM_TOPICS = [
+  // AI & Machine Learning
   "How artificial intelligence is reshaping digital banking",
-  "The evolution of payment gateways in e-commerce",
-  "Building robust microservices for financial platforms",
-  "Understanding PCI DSS compliance in modern web apps",
-  "The role of blockchain in cross-border transactions",
-  "Strategies for scaling high-throughput APIs",
   "Machine learning for real-time fraud detection",
+  "The rise of generative AI in customer support",
+  "Building LLM-powered applications: A practical guide",
+  "AI-driven personalization in e-commerce platforms",
+  "Ethical considerations in algorithmic decision making",
+  "Predictive analytics for modern inventory management",
+  "Leveraging AI for automated code reviews and testing",
+  "Vector databases: The backbone of modern AI apps",
+  "Demystifying RAG (Retrieval-Augmented Generation)",
+
+  // Fintech & Payments
+  "The evolution of payment gateways in e-commerce",
+  "The role of blockchain in cross-border transactions",
+  "The impact of open banking on traditional financial institutions",
   "Designing accessible and secure fintech user interfaces",
   "A guide to webhook security in payment processing",
-  "Exploring the benefits of serverless architecture for startups",
-  "Implementing zero-trust security in financial applications",
-  "The impact of open banking on traditional financial institutions",
-  "Best practices for database migrations with zero downtime",
+  "Building compliant onboarding flows for financial apps",
+  "The future of decentralized finance (DeFi)",
+  "Integrating multi-currency wallets in mobile apps",
+  "Smart contracts and the future of escrow services",
+  "Navigating regulatory compliance in fintech startups",
+
+  // Software Engineering & Architecture
+  "Building robust microservices for financial platforms",
+  "Strategies for scaling high-throughput APIs",
   "Using WebSockets for real-time financial market data",
+  "Event-driven architecture: When and why to use it",
+  "The transition from monoliths to serverless microservices",
+  "GraphQL vs REST: Choosing the right API paradigm",
+  "Managing state in large-scale React applications",
+  "Building offline-first progressive web apps (PWAs)",
+  "Effective caching strategies for high-traffic websites",
+  "Optimizing frontend performance for better Core Web Vitals",
+
+  // DevOps & Cloud Infrastructure
+  "Exploring the benefits of serverless architecture for startups",
+  "Best practices for database migrations with zero downtime",
+  "Infrastructure as Code: Managing deployments with Terraform",
+  "Implementing continuous integration for mobile apps",
+  "Kubernetes for beginners: Orchestrating containers",
+  "Monitoring and observability in distributed systems",
+  "The shift towards multi-cloud and hybrid environments",
+  "Chaos engineering: Building resilient infrastructure",
+  "Automating database backups and disaster recovery",
+  "Understanding edge computing and its use cases",
+
+  // Security & Compliance
+  "Understanding PCI DSS compliance in modern web apps",
+  "Implementing zero-trust security in financial applications",
+  "Defending against OWASP Top 10 vulnerabilities",
+  "Best practices for secure user authentication and authorization",
+  "The role of penetration testing in software delivery",
+  "Securing supply chains in modern software development",
+  "Data privacy laws: GDPR, CCPA, and building compliant apps",
+  "Strategies for managing API rate limiting and DDoS attacks",
+  "End-to-end encryption in real-time messaging apps",
+  "OAuth 2.0 and OpenID Connect explained simply",
+
+  // Product Strategy & Operations
+  "Bridging the gap between engineering and product teams",
+  "The importance of user-centered design in enterprise software",
+  "Agile methodologies: Finding the right fit for your team",
+  "Measuring technical debt and when to refactor",
+  "Building a culture of engineering excellence",
+  "The economics of technical decisions in early-stage startups",
+  "Effective strategies for developer onboarding",
+  "Open source contributions and building a tech brand",
 ];
 
 export function AIGenerator({ id }: { id: string }) {
@@ -101,20 +156,20 @@ export function AIGenerator({ id }: { id: string }) {
         />
         <div className="ops-ai-actions">
           <button
-          type="button"
-          onClick={handleRandomTopic}
-          className="button button-secondary"
-          disabled={loading}
-          title="Pick a random topic"
-          style={{ padding: "0 1rem" }}
-        >
-          🎲
-        </button>
-        <button
-          type="button"
-          onClick={handleGenerate}
-          className="button button-primary"
-          disabled={loading}
+            type="button"
+            onClick={handleRandomTopic}
+            className="button button-secondary"
+            disabled={loading}
+            title="Pick a random topic"
+            style={{ padding: "0 1rem" }}
+          >
+            🎲
+          </button>
+          <button
+            type="button"
+            onClick={handleGenerate}
+            className="button button-primary"
+            disabled={loading}
           >
             {loading ? "Generating..." : "Generate Draft"}
           </button>
