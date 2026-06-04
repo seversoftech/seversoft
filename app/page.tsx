@@ -2,7 +2,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServicesFlashcards from "@/components/ServicesFlashcards";
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
+import { getPublishedPosts } from "@/lib/blog";
 
 type PartnerLogoStyle = CSSProperties & {
   "--hover-color": string;
@@ -37,26 +39,7 @@ const benefits = [
   },
 ];
 
-const reviews = [
-  {
-    quote:
-      "Seversoft helped us launch a cleaner payment experience in weeks, not months. The platform felt stable from day one.",
-    name: "Alex Johnson",
-    role: "Operations Lead, Retail Logistics",
-  },
-  {
-    quote:
-      "Their team combines fintech understanding with strong engineering discipline. Integration was smooth and support has been excellent.",
-    name: "Sarah Williams",
-    role: "Founder, Fintech Startup",
-  },
-  {
-    quote:
-      "We needed something reliable, affordable, and scalable. Seversoft delivered all three without adding unnecessary complexity.",
-    name: "Michael Chen",
-    role: "Product Manager, Tech Solutions",
-  },
-];
+
 
 const partners = [
   { name: "AWS", color: "#ff9900", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg" },
@@ -150,7 +133,10 @@ function HeroVisual() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = await getPublishedPosts();
+  const recentPosts = blogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
+
   return (
     <main id="top">
       <Navbar />
@@ -473,24 +459,90 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="testimonials" className="section section-light testimonials-section">
+      <section id="insights" className="section section-light">
         <div className="shell">
-          <div className="section-heading centered reveal">
-            <span className="section-kicker kicker-with-dot">Testimonials</span>
-            <h2>Trusted by teams that value speed and clarity</h2>
-            <p>Clients choose Seversoft for thoughtful execution across software delivery, AI integration, and fintech systems.</p>
+          <div className="section-heading reveal">
+            <span className="section-kicker kicker-with-dot">Latest Insights</span>
+            <h2 style={{ color: "var(--text-dark)", fontSize: "clamp(1rem, 2vw, 1.7rem)" }}>Fresh thinking for modern teams</h2>
+            <p style={{ color: "rgba(15,20,26,0.68)" }}>
+              Short reads for founders, operators, and product teams planning stronger digital infrastructure.
+            </p>
           </div>
 
-          <div className="testimonials-grid">
-            {reviews.map((review, index) => (
-              <article key={review.name} className="testimonial-card reveal" style={{ animationDelay: `${index * 90}ms` }}>
-                <p className="testimonial-quote">“{review.quote}”</p>
-                <div className="testimonial-meta">
-                  <strong>{review.name}</strong>
-                  <span>{review.role}</span>
+          <div className="blog-post-list" style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+            {recentPosts.map((post) => (
+              <article
+                key={post.title}
+                className="blog-list-item reveal"
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "20px",
+                  padding: "20px 0",
+                  borderBottom: "1px solid rgba(15,20,26,0.08)",
+                  color: "var(--text-dark)",
+                }}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <span
+                    className="store-tag"
+                    style={{
+                      display: "inline-block",
+                      marginBottom: "8px",
+                      color: "var(--text-dark)",
+                      borderColor: "rgba(15,20,26,0.15)",
+                      background: "rgba(15,20,26,0.04)",
+                      fontSize: "0.62rem",
+                      padding: "3px 9px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {post.category}
+                  </span>
+                  <Link href={`/blog/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
+                    <h3
+                      className="blog-card-title"
+                      style={{
+                        color: "var(--text-dark)",
+                        fontSize: "1rem",
+                        margin: "0 0 6px",
+                        lineHeight: "1.35",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {post.title}
+                    </h3>
+                  </Link>
+                  {post.callout && (
+                    <p
+                      className="blog-card-excerpt"
+                      style={{ color: "#64748b", lineHeight: "1.6", fontSize: "0.87rem", margin: 0 }}
+                    >
+                      {post.callout}
+                    </p>
+                  )}
                 </div>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  style={{
+                    flexShrink: 0,
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: "#0f766e",
+                    textDecoration: "none",
+                    marginTop: "2px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Read →
+                </Link>
               </article>
             ))}
+          </div>
+          <div style={{ marginTop: "40px", textAlign: "center" }}>
+            <Link href="/blog" className="button button-secondary">
+              View All Articles
+            </Link>
           </div>
         </div>
       </section>

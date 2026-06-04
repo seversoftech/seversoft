@@ -8,7 +8,7 @@ const navLinks = [
   { label: "About", href: "/#about" },
   { label: "Services", href: "/services" },
   { label: "Store", href: "/#store" },
-  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Insight", href: "/blog" },
 ];
 
 const exploreLinks = [
@@ -18,7 +18,7 @@ const exploreLinks = [
     desc: "Products, stack & integrations",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+        <circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
       </svg>
     ),
   },
@@ -28,7 +28,7 @@ const exploreLinks = [
     desc: "API guides & developer resources",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
       </svg>
     ),
   },

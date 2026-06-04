@@ -27,9 +27,9 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
 
       <section className="section section-dark ecosystem-hero blog-hero" style={{ paddingTop: "30px", paddingBottom: "90px" }}>
         <div className="shell blog-hero-shell" style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center" }}>
-          <span className="section-kicker kicker-with-dot">Seversoft Blog</span>
+          <span className="section-kicker kicker-with-dot">Seversoft Articles </span>
           <h1 style={{ marginTop: "20px", marginBottom: "20px" }}>
-            Notes on building <span className="text-gradient">systems that scale.</span>
+            Thoughts on building <span className="text-gradient">dependable digital products.</span>
           </h1>
           <p className="blog-hero-copy" style={{ color: "var(--text-soft)", fontSize: "1.08rem", lineHeight: "1.8", margin: "0 auto", maxWidth: "680px" }}>
             Practical ideas on software delivery, fintech infrastructure, AI automation, compliance, and the engineering choices behind dependable digital products.
