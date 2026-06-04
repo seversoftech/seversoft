@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ShareButtons from "@/components/ShareButtons";
 import { getPublishedPost, getPublishedPosts } from "@/lib/blog";
 
 export const revalidate = 60;
@@ -106,6 +107,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </section>
               ))}
             </div>
+            
+            <ShareButtons title={post.title} slug={post.slug} excerpt={post.excerpt} />
           </article>
         </div>
       </section>
