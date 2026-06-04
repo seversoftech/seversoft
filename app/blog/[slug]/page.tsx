@@ -17,9 +17,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
+  const baseUrl = "https://seversoft.com";
+  const articleUrl = `${baseUrl}/blog/${slug}`;
+
   return {
     title: `${post.title} | Seversoft Blog`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: articleUrl,
+      type: "article",
+      authors: ["Seversoft Technologies"],
+      tags: [post.category],
+      publishedTime: post.date,
+      siteName: "Seversoft Blog",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      creator: "@seversoft",
+    },
   };
 }
 
