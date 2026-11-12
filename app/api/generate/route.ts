@@ -43,7 +43,7 @@ The JSON must have the following keys:
           content: `Write a blog post about: ${prompt}`,
         },
       ],
-      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      model: "openai/gpt-oss-120b",
       temperature: 0.7,
       response_format: { type: "json_object" },
     });
