@@ -43,7 +43,7 @@ The JSON must have the following keys:
           content: `Write a blog post about: ${prompt}`,
         },
       ],
-      model: "llama-3.3-70b-versatile", // Using a current supported Groq model
+      model: "meta-llama/llama-4-scout-17b-16e-instruct",
       temperature: 0.7,
       response_format: { type: "json_object" },
     });
