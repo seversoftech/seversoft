@@ -15,6 +15,7 @@ import { AIGenerator } from "./AIGenerator";
 
 import { PostFields } from "./PostFields";
 import { PostList } from "./PostList";
+import { SettingsPanel } from "./SettingsPanel";
 
 function formatAuditDate(value: string) {
   return new Intl.DateTimeFormat("en", {
@@ -86,6 +87,9 @@ export default async function OpsAdminPage({
           <p>Manage production blog posts, review publishing status, and monitor content activity.</p>
         </div>
         <div className="ops-header-actions">
+          <a href="#settings" className="button button-secondary">
+            ⚙️ AI Settings
+          </a>
           <Link href="/blog" className="button button-secondary">
             View Blog
           </Link>
@@ -129,6 +133,10 @@ export default async function OpsAdminPage({
           </Link>
         ))}
       </section>
+
+      <div id="settings" style={{ maxWidth: "1280px", margin: "0 auto 18px" }}>
+        <SettingsPanel />
+      </div>
 
       <section className="ops-grid">
         <form className="ops-panel frame-card ops-editor" action={createPostAction}>

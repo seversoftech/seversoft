@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
 import { isAdminAuthed } from "@/app/ops/add/actions";
+import { getSettings } from "@/lib/settings";
 
 // Models that don't support chat completions (audio-only, classifiers, etc.)
 const EXCLUDED_MODELS = [
@@ -20,14 +21,17 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (!process.env.GROQ_API_KEY) {
+    const settings = await getSettings();
+    const apiKey = settings.groqApiKey || process.env.GROQ_API_KEY;
+
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "GROQ_API_KEY is not configured" },
+        { error: "Groq API Key is not configured. Please add it in Settings." },
         { status: 500 }
       );
     }
 
-    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+    const groq = new Groq({ apiKey });
     const list = await groq.models.list();
 
     const chatModels = list.data
@@ -35,7 +39,11 @@ export async function GET() {
       .sort((a, b) => a.id.localeCompare(b.id))
       .map((m) => ({ id: m.id, name: m.id }));
 
-    return NextResponse.json({ models: chatModels });
+    return NextResponse.json({
+      models: chatModels,
+      defaultModel: settings.defaultModel,
+      activeProvider: settings.activeProvider,
+    });
   } catch (error: unknown) {
     console.error("Failed to fetch models:", error);
     const message =

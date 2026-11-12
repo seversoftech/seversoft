@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
 import { isAdminAuthed } from "@/app/ops/add/actions";
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-
-const DEFAULT_MODEL = "openai/gpt-oss-120b";
+import { getSettings } from "@/lib/settings";
 
 export async function POST(req: Request) {
   try {
@@ -13,19 +10,25 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (!process.env.GROQ_API_KEY) {
+    const settings = await getSettings();
+    const apiKey = settings.groqApiKey || process.env.GROQ_API_KEY;
+
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "GROQ_API_KEY is not configured in .env.local" },
+        { error: "Groq API Key is not configured. Please add it in Settings." },
         { status: 500 }
       );
     }
+
+    const groq = new Groq({ apiKey });
 
     const { prompt, model } = await req.json();
     if (!prompt) {
       return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
     }
 
-    const selectedModel = model || DEFAULT_MODEL;
+    const selectedModel = model || settings.defaultModel || "openai/gpt-oss-120b";
+    const temperature = typeof settings.temperature === "number" ? settings.temperature : 0.7;
 
     const completion = await groq.chat.completions.create({
       messages: [
@@ -48,7 +51,7 @@ The JSON must have the following keys:
         },
       ],
       model: selectedModel,
-      temperature: 0.7,
+      temperature,
       response_format: { type: "json_object" },
     });
 

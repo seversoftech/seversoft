@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { slugify } from "@/lib/blog";
 
 const RANDOM_TOPICS = [
@@ -88,30 +88,42 @@ export function AIGenerator({ id }: { id: string }) {
   const [selectedModel, setSelectedModel] = useState("");
   const [modelsLoading, setModelsLoading] = useState(true);
 
-  // Fetch available models on mount
-  useEffect(() => {
-    async function fetchModels() {
-      try {
-        const res = await fetch("/api/models");
-        const data = await res.json();
-        if (res.ok && data.models?.length) {
-          setModels(data.models);
-          // Default to the first model, or a preferred one if available
-          const preferred = data.models.find(
-            (m: GroqModel) => m.id === "openai/gpt-oss-120b"
-          );
-          setSelectedModel(preferred ? preferred.id : data.models[0].id);
-        } else {
-          setError(data.error || "No models available");
-        }
-      } catch {
-        setError("Failed to load models");
-      } finally {
-        setModelsLoading(false);
+  const fetchModels = useCallback(async () => {
+    try {
+      setModelsLoading(true);
+      const res = await fetch("/api/models");
+      const data = await res.json();
+      if (res.ok && data.models?.length) {
+        setModels(data.models);
+        // Default to configured default model from settings or first
+        const defaultChoice = data.defaultModel && data.models.some((m: GroqModel) => m.id === data.defaultModel)
+          ? data.defaultModel
+          : data.models[0].id;
+        setSelectedModel(defaultChoice);
+        setError("");
+      } else {
+        setError(data.error || "No models available");
       }
+    } catch {
+      setError("Failed to load models");
+    } finally {
+      setModelsLoading(false);
     }
-    fetchModels();
   }, []);
+
+  // Fetch available models on mount and listen to settings updates
+  useEffect(() => {
+    fetchModels();
+
+    const handleSettingsUpdate = () => {
+      fetchModels();
+    };
+
+    window.addEventListener("ai-settings-updated", handleSettingsUpdate);
+    return () => {
+      window.removeEventListener("ai-settings-updated", handleSettingsUpdate);
+    };
+  }, [fetchModels]);
 
   const handleRandomTopic = () => {
     const random = RANDOM_TOPICS[Math.floor(Math.random() * RANDOM_TOPICS.length)];
@@ -177,26 +189,43 @@ export function AIGenerator({ id }: { id: string }) {
 
   return (
     <div className="ops-panel frame-card" style={{ marginBottom: "1rem", background: "var(--color-bg-alt, #111)", padding: "1.5rem" }}>
-      <div style={{ marginBottom: "1rem" }}>
-        <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>✨ AI Content Generator</h3>
-        <p style={{ margin: "0.25rem 0 0", fontSize: "0.875rem", opacity: 0.7 }}>
-          Enter a topic and let AI draft the blog post for you.
-        </p>
+      <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <div>
+          <h3 style={{ margin: 0, fontSize: "1rem", fontWeight: 600 }}>✨ AI Content Generator</h3>
+          <p style={{ margin: "0.25rem 0 0", fontSize: "0.875rem", opacity: 0.7 }}>
+            Enter a topic and let AI draft the blog post for you.
+          </p>
+        </div>
+        <a
+          href="#settings"
+          style={{
+            fontSize: "0.75rem",
+            color: "var(--teal)",
+            textDecoration: "none",
+            fontWeight: 600,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "4px",
+            opacity: 0.85,
+          }}
+        >
+          ⚙️ Manage Keys & Models
+        </a>
       </div>
 
       {/* Model selector */}
       <div style={{ marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <label
-          htmlFor="model-select"
+          htmlFor={`model-select-${id}`}
           style={{ fontSize: "0.8rem", fontWeight: 600, opacity: 0.7, whiteSpace: "nowrap" }}
         >
           Model:
         </label>
         {modelsLoading ? (
-          <span style={{ fontSize: "0.8rem", opacity: 0.5 }}>Loading models…</span>
+          <span style={{ fontSize: "0.8rem", opacity: 0.5 }}>Loading available models…</span>
         ) : (
           <select
-            id="model-select"
+            id={`model-select-${id}`}
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value)}
             disabled={loading || models.length === 0}

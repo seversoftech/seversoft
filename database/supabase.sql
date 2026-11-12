@@ -26,8 +26,15 @@
 --   created_at timestamptz not null default now()
 -- );
 
+-- create table if not exists public.app_settings (
+--   key text primary key,
+--   value text not null,
+--   updated_at timestamptz not null default now()
+-- );
+
 -- alter table public.posts enable row level security;
 -- alter table public.audit_logs enable row level security;
+-- alter table public.app_settings enable row level security;
 
 -- drop policy if exists "Published posts are publicly readable" on public.posts;
 -- create policy "Published posts are publicly readable"
