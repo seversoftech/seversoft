@@ -197,7 +197,7 @@ export function AIGenerator({ id }: { id: string }) {
           </p>
         </div>
         <a
-          href="#settings"
+          href="/ops/settings"
           style={{
             fontSize: "0.75rem",
             color: "var(--teal)",
