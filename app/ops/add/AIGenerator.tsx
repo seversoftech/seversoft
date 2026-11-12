@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { slugify } from "@/lib/blog";
 
 const RANDOM_TOPICS = [
@@ -75,10 +75,43 @@ const RANDOM_TOPICS = [
   "Open source contributions and building a tech brand",
 ];
 
+interface GroqModel {
+  id: string;
+  name: string;
+}
+
 export function AIGenerator({ id }: { id: string }) {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [models, setModels] = useState<GroqModel[]>([]);
+  const [selectedModel, setSelectedModel] = useState("");
+  const [modelsLoading, setModelsLoading] = useState(true);
+
+  // Fetch available models on mount
+  useEffect(() => {
+    async function fetchModels() {
+      try {
+        const res = await fetch("/api/models");
+        const data = await res.json();
+        if (res.ok && data.models?.length) {
+          setModels(data.models);
+          // Default to the first model, or a preferred one if available
+          const preferred = data.models.find(
+            (m: GroqModel) => m.id === "openai/gpt-oss-120b"
+          );
+          setSelectedModel(preferred ? preferred.id : data.models[0].id);
+        } else {
+          setError(data.error || "No models available");
+        }
+      } catch {
+        setError("Failed to load models");
+      } finally {
+        setModelsLoading(false);
+      }
+    }
+    fetchModels();
+  }, []);
 
   const handleRandomTopic = () => {
     const random = RANDOM_TOPICS[Math.floor(Math.random() * RANDOM_TOPICS.length)];
@@ -91,6 +124,11 @@ export function AIGenerator({ id }: { id: string }) {
       return;
     }
 
+    if (!selectedModel) {
+      setError("Please select a model first.");
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -98,7 +136,7 @@ export function AIGenerator({ id }: { id: string }) {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt, model: selectedModel }),
       });
 
       const data = await res.json();
@@ -146,6 +184,42 @@ export function AIGenerator({ id }: { id: string }) {
         </p>
       </div>
 
+      {/* Model selector */}
+      <div style={{ marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <label
+          htmlFor="model-select"
+          style={{ fontSize: "0.8rem", fontWeight: 600, opacity: 0.7, whiteSpace: "nowrap" }}
+        >
+          Model:
+        </label>
+        {modelsLoading ? (
+          <span style={{ fontSize: "0.8rem", opacity: 0.5 }}>Loading models…</span>
+        ) : (
+          <select
+            id="model-select"
+            value={selectedModel}
+            onChange={(e) => setSelectedModel(e.target.value)}
+            disabled={loading || models.length === 0}
+            style={{
+              flex: 1,
+              padding: "0.4rem 0.6rem",
+              fontSize: "0.8rem",
+              borderRadius: "6px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.06)",
+              color: "inherit",
+              cursor: "pointer",
+            }}
+          >
+            {models.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.id}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
+
       <div className="ops-ai-bar">
         <input
           type="text"
@@ -169,7 +243,7 @@ export function AIGenerator({ id }: { id: string }) {
             type="button"
             onClick={handleGenerate}
             className="button button-primary"
-            disabled={loading}
+            disabled={loading || !selectedModel}
           >
             {loading ? "Generating..." : "Generate Draft"}
           </button>

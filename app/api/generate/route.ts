@@ -4,6 +4,8 @@ import { isAdminAuthed } from "@/app/ops/add/actions";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+const DEFAULT_MODEL = "openai/gpt-oss-120b";
+
 export async function POST(req: Request) {
   try {
     const isAuthed = await isAdminAuthed();
@@ -18,10 +20,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const { prompt } = await req.json();
+    const { prompt, model } = await req.json();
     if (!prompt) {
       return NextResponse.json({ error: "Prompt is required" }, { status: 400 });
     }
+
+    const selectedModel = model || DEFAULT_MODEL;
 
     const completion = await groq.chat.completions.create({
       messages: [
@@ -43,7 +47,7 @@ The JSON must have the following keys:
           content: `Write a blog post about: ${prompt}`,
         },
       ],
-      model: "openai/gpt-oss-120b",
+      model: selectedModel,
       temperature: 0.7,
       response_format: { type: "json_object" },
     });
@@ -61,8 +65,6 @@ The JSON must have the following keys:
       if (cleaned.startsWith("```")) {
         cleaned = cleaned.replace(/^```(json)?\s*/i, "").replace(/```$/i, "").trim();
       }
-      // In case the model still outputs literal newlines in strings, escape them before parsing.
-      // But json_object format should guarantee valid JSON.
       parsed = JSON.parse(cleaned);
     } catch (_e) {
       console.error("Failed to parse Groq output:", output);
